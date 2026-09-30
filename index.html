@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio — Продуктовый дизайнер</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <!-- ===== ШАПКА ===== -->
+    <header class="header">
+        <div class="header__inner">
+            <a href="index.html" class="header__logo">
+                <img src="elements/Logo.svg" alt="Logo" width="91" height="24">
+            </a>
+            <nav class="header__nav">
+                <a href="#cases" class="header__link">Кейсы</a>
+                <a href="#approach" class="header__link">Подход</a>
+                <a href="about.html" class="header__link">Обо мне</a>
+            </nav>
+            <a href="#contacts" class="btn btn_primary_small_icon">
+                <span>Пообщаемся?</span>
+                <img class="btn__icon btn__icon--default" src="elements/icon_hand.png" alt="" width="20" height="20">
+                <img class="btn__icon btn__icon--hover" src="elements/icon_hand.png" alt="" width="20" height="20">
+            </a>
+            <button class="burger" aria-label="Меню">
+                <span class="burger__line"></span>
+                <span class="burger__line"></span>
+                <span class="burger__line burger__line--short"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ===== МОБИЛЬНОЕ МЕНЮ ===== -->
+    <div class="mobile-menu">
+        <div class="mobile-menu__inner">
+            <nav class="mobile-menu__nav">
+                <a href="#cases" class="mobile-menu__link">Кейсы</a>
+                <a href="#approach" class="mobile-menu__link">Подход</a>
+                <a href="about.html" class="mobile-menu__link">Обо мне</a>
+            </nav>
+            <a href="#contacts" class="btn btn_primary_small_icon mobile-menu__cta">
+                <span>Пообщаемся?</span>
+                <img class="btn__icon btn__icon--default" src="elements/icon_hand.png" alt="" width="20" height="20">
+                <img class="btn__icon btn__icon--hover" src="elements/icon_hand.png" alt="" width="20" height="20">
+            </a>
+        </div>
+    </div>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <div class="hero__top-bar">
+            <div class="scr_devider"></div>
+            <div class="hero__top-bar-inner">
+                <span class="top-bar__left">Портфолио *26</span>
+                <div class="top-bar__right">
+                    <img src="elements/indicator_on.svg" alt="" width="17" height="17">
+                    <span>Готов к сотрудничеству</span>
+                </div>
+                <a href="about.html" class="hero__right hero__right-mobile">
+                    Обо мне
+                    <img src="elements/arrow-right.svg" alt="">
+                </a>
+            </div>
+        </div>
+
+        <div class="hero__bg"></div>
+        <div class="hero__inner">
+            <div class="hero__left">
+                <h1 class="hero__title">Превращаю<br>бизнес-требования<br>в интуитивные<br>интерфейсы</h1>
+                <p class="hero__subtitle">Мой опыт в коммуникационном дизайне и моушене помогает создавать интерфейсы, которые не просто работают, но и удерживают внимание пользователя. Понимаю базовый JS, поэтому мои макеты в Figma собираются в чистый код без боли для разработки</p>
+                <div class="hero__buttons">
+                    <a href="#cases" class="btn btn_primary_big_icon">
+                        Кейсы
+                        <img class="btn__icon btn__icon--default" src="elements/Arrow-white.svg" alt="">
+                        <img class="btn__icon btn__icon--hover" src="elements/Arrow-white.svg" alt="">
+                    </a>
+                    <a href="#approach" class="btn btn_secondary_big">Подход</a>
+                </div>
+            </div>
+            <a href="about.html" class="hero__right">
+                Обо мне
+                <img src="elements/arrow-right.svg" alt="">
+            </a>
+        </div>
+    </section>
+
+    <!-- ===== КЕЙСЫ ===== -->
+    <section class="cases-page" id="cases">
+        <div class="cases-page__inner">
+            <!-- Title блок -->
+            <div class="cases-page__title">
+                <div class="cases-page__title-text">
+                    <span class="cases-page__number">01</span>
+                    <span class="cases-page__heading">Кейсы</span>
+                </div>
+                <div class="scr_devider"></div>
+                <!-- Вкладки -->
+                <div class="cases-page__tabs">
+                    <span class="cases-page__tab btn btn_secondary_small cases-page__tab--active" data-tab="product">Product</span>
+                    <span class="cases-page__tab btn btn_secondary_small" data-tab="web">Web&Visual</span>
+                    <span class="cases-page__tab btn btn_secondary_small" data-tab="motion">Motion</span>
+                </div>
+            </div>
+
+            <!-- Список кейсов -->
+            <div class="cases-list">
+                <!-- Вкладка: Product -->
+                <div class="cases-tab" data-tab="product">
+                    <!-- Кейс A -->
+                    <div class="case-card">
+                        <div class="block_devider_gray"></div>
+                        <div class="case-card__content">
+                            <div class="case-card__number">A</div>
+                            <div class="case-card__left">
+                                <div class="case-card__info">
+                                    <h3 class="case-card__title">Геймифицированная промо-акция<br>для QSR-сети</h3>
+                                    <p class="case-card__desc">Мобильный интерфейс для участия в акции со сканированием чеков,<br>коллекционированием кодов и розыгрышами призов</p>
+                                    <div class="case-card__tags">
+                                        <span class="case-card__tag">Product Design</span>
+                                        <span class="case-card__tag">Mobile App</span>
+                                        <span class="case-card__tag">Figma</span>
+                                        <span class="case-card__tag">Tag text</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" class="case-card__image">
+                                <img src="elements/Product_Case_1.jpg" alt="Case A">
+                            </a>
+                            <a href="#" class="case-card__arrow">
+                                <img class="arrow-default" src="elements/arrow-right.svg" alt="">
+                                <img class="arrow-hover" src="elements/arrow-right-blue.svg" alt="">
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Кейс B -->
+                    <div class="case-card">
+                        <div class="block_devider_gray"></div>
+                        <div class="case-card__content">
+                            <div class="case-card__number">B</div>
+                            <div class="case-card__left">
+                                <div class="case-card__info">
+                                    <h3 class="case-card__title">Погодный интерфейс<br>для Яндекс Карт</h3>
+                                    <p class="case-card__desc">Интеграция погодных данных в навигационный сценарий:<br>виджет, детальный прогноз и ситуативные уведомления</p>
+                                    <div class="case-card__tags">
+                                        <span class="case-card__tag">Product Design</span>
+                                        <span class="case-card__tag">UX Research + UI</span>
+                                        <span class="case-card__tag">Mobile App</span>
+                                        <span class="case-card__tag">Figma</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" class="case-card__image">
+                                <img src="elements/Product_Case_2.jpg" alt="Case B">
+                            </a>
+                            <a href="#" class="case-card__arrow">
+                                <img class="arrow-default" src="elements/arrow-right.svg" alt="">
+                                <img class="arrow-hover" src="elements/arrow-right-blue.svg" alt="">
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Кейс C -->
+                    <div class="case-card">
+                        <div class="block_devider_gray"></div>
+                        <div class="case-card__content">
+                            <div class="case-card__number">C</div>
+                            <div class="case-card__left">
+                                <div class="case-card__info">
+                                    <h3 class="case-card__title">Повышение конверсии<br>в апсейл Яндекс Плюс</h3>
+                                    <p class="case-card__desc">Изменение механики экрана апсейла: от статичного баннера<br>к персонализированной шторке с прогрессивным раскрытием</p>
+                                    <div class="case-card__tags">
+                                        <span class="case-card__tag">Product Design</span>
+                                        <span class="case-card__tag">UX Research + UI</span>
+                                        <span class="case-card__tag">Mobile App</span>
+                                        <span class="case-card__tag">Figma</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" class="case-card__image">
+                                <img src="elements/Product_Case_3.jpg" alt="Case C">
+                            </a>
+                            <a href="#" class="case-card__arrow">
+                                <img class="arrow-default" src="elements/arrow-right.svg" alt="">
+                                <img class="arrow-hover" src="elements/arrow-right-blue.svg" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Вкладка: Web&Visual -->
+                <div class="cases-tab cases-tab--hidden" data-tab="web">
+                    <!-- Кейс D -->
+                    <div class="case-card">
+                        <div class="block_devider_gray"></div>
+                        <div class="case-card__content">
+                            <div class="case-card__number">D</div>
+                            <div class="case-card__left">
+                                <div class="case-card__info">
+                                    <h3 class="case-card__title">Редизайн маркетплейса<br>для продажи крафтовых товаров</h3>
+                                    <p class="case-card__desc">Полный редизайн интернет-магазина с фокусом на визуальную<br>подачу товаров и упрощение воронки покупки</p>
+                                    <div class="case-card__tags">
+                                        <span class="case-card__tag">Web Design</span>
+                                        <span class="case-card__tag">UI/UX</span>
+                                        <span class="case-card__tag">Figma</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" class="case-card__image">
+                                <img src="elements/Product_Case_1.jpg" alt="Case D">
+                            </a>
+                            <a href="#" class="case-card__arrow">
+                                <img class="arrow-default" src="elements/arrow-right.svg" alt="">
+                                <img class="arrow-hover" src="elements/arrow-right-blue.svg" alt="">
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Кейс E -->
+                    <div class="case-card">
+                        <div class="block_devider_gray"></div>
+                        <div class="case-card__content">
+                            <div class="case-card__number">E</div>
+                            <div class="case-card__left">
+                                <div class="case-card__info">
+                                    <h3 class="case-card__title">Дашборд аналитики<br>для SaaS-платформы</h3>
+                                    <p class="case-card__desc">Визуализация бизнес-метрик в реальном времени:<br>графики, фильтры, экспорт отчётов</p>
+                                    <div class="case-card__tags">
+                                        <span class="case-card__tag">Web Design</span>
+                                        <span class="case-card__tag">Dashboard</span>
+                                        <span class="case-card__tag">Figma</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" class="case-card__image">
+                                <img src="elements/Product_Case_2.jpg" alt="Case E">
+                            </a>
+                            <a href="#" class="case-card__arrow">
+                                <img class="arrow-default" src="elements/arrow-right.svg" alt="">
+                                <img class="arrow-hover" src="elements/arrow-right-blue.svg" alt="">
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Кейс F -->
+                    <div class="case-card">
+                        <div class="block_devider_gray"></div>
+                        <div class="case-card__content">
+                            <div class="case-card__number">F</div>
+                            <div class="case-card__left">
+                                <div class="case-card__info">
+                                    <h3 class="case-card__title">Визуальная айдентика<br>для IT-стартапа</h3>
+                                    <p class="case-card__desc">Разработка фирменного стиля: логотип, цветовая палитра,<br>типографика и гайдлайны для команды</p>
+                                    <div class="case-card__tags">
+                                        <span class="case-card__tag">Visual Design</span>
+                                        <span class="case-card__tag">Branding</span>
+                                        <span class="case-card__tag">Figma</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" class="case-card__image">
+                                <img src="elements/Product_Case_3.jpg" alt="Case F">
+                            </a>
+                            <a href="#" class="case-card__arrow">
+                                <img class="arrow-default" src="elements/arrow-right.svg" alt="">
+                                <img class="arrow-hover" src="elements/arrow-right-blue.svg" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Вкладка: Motion -->
+                <div class="cases-tab cases-tab--motion cases-tab--hidden" data-tab="motion">
+                    <!-- Кейс G -->
+                    <div class="case-card">
+                        <div class="block_devider_gray"></div>
+                        <div class="case-card__content">
+                            <div class="case-card__number">G</div>
+                            <div class="case-card__left">
+                                <div class="case-card__info">
+                                    <h3 class="case-card__title">Анимация онбординга<br>для финтех-приложения</h3>
+                                    <p class="case-card__desc">Последовательность экранов первого знакомства с приложением:<br>micro-interactions, переходы, скелетоны</p>
+                                    <div class="case-card__tags">
+                                        <span class="case-card__tag">Motion Design</span>
+                                        <span class="case-card__tag">Mobile App</span>
+                                        <span class="case-card__tag">After Effects</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" class="case-card__image">
+                                <img src="elements/Product_Case_1.jpg" alt="Case G">
+                            </a>
+                            <a href="#" class="case-card__arrow">
+                                <img class="arrow-default" src="elements/arrow-right.svg" alt="">
+                                <img class="arrow-hover" src="elements/arrow-right-blue.svg" alt="">
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Кейс H -->
+                    <div class="case-card">
+                        <div class="block_devider_gray"></div>
+                        <div class="case-card__content">
+                            <div class="case-card__number">H</div>
+                            <div class="case-card__left">
+                                <div class="case-card__info">
+                                    <h3 class="case-card__title">Промо-ролик<br>для запуска продукта</h3>
+                                    <p class="case-card__desc">60-секундное видео для презентации нового продукта<br>на конференции и в социальных сетях</p>
+                                    <div class="case-card__tags">
+                                        <span class="case-card__tag">Motion Design</span>
+                                        <span class="case-card__tag">Video</span>
+                                        <span class="case-card__tag">After Effects</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" class="case-card__image">
+                                <img src="elements/Product_Case_2.jpg" alt="Case H">
+                            </a>
+                            <a href="#" class="case-card__arrow">
+                                <img class="arrow-default" src="elements/arrow-right.svg" alt="">
+                                <img class="arrow-hover" src="elements/arrow-right-blue.svg" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ПОДХОД ===== -->
+    <section class="approach" id="approach">
+        <div class="approach__inner">
+            <!-- Title блок -->
+            <div class="approach__title">
+                <div class="approach__title-text">
+                    <span class="approach__number">02</span>
+                    <span class="approach__heading">Подход</span>
+                </div>
+                <div class="scr_devider"></div>
+            </div>
+
+            <!-- Текстовый блок -->
+            <div class="approach__content">
+                <div class="approach__main-text">
+                    <h2 class="approach__headline">Я ищу способы оптимизировать процессы, чтобы команда тратила время на решения, а не на рутину. Каждый сэкономленный час разработки — это бюджет, который можно направить на тестирование гипотез</h2>
+                </div>
+                <div class="approach__side-block">
+                    <p class="approach__side-text">Использую AI-инструменты для генерации кода, прототипов и контента. Это экономит до 40% времени на технических задачах, чтобы я мог фокусироваться на логике и пользователях</p>
+                    <div class="approach__buttons">
+                        <a href="#" class="btn btn_primary_approach">
+                            Скачать резюме
+                            <img class="btn__icon btn__icon--default" src="elements/pdf-white.svg" alt="" width="16" height="16">
+                            <img class="btn__icon btn__icon--hover" src="elements/pdf-white.svg" alt="" width="16" height="16">
+                        </a>
+                        <a href="about.html" class="btn btn_secondary_approach">
+                            Обо мне
+                            <img class="btn__icon btn__icon--default" src="elements/arrow-right.svg" alt="" width="16" height="16">
+                            <img class="btn__icon btn__icon--hover" src="elements/arrow-right-white.svg" alt="" width="16" height="16">
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Карточки подхода -->
+            <div class="approach__cards">
+                <!-- Карточка 1 -->
+                <div class="approach-card">
+                    <div class="approach-card__number">A</div>
+                    <div class="approach-card__body">
+                        <h3 class="approach-card__title">Исследование</h3>
+                        <p class="approach-card__desc">Я начинаю не с Figma, а с вопросов: кто эти люди? Что их бесит в текущем продукте? Чего они боятся? Когда я понимаю человека — интерфейс рисуется сам</p>
+                    </div>
+                </div>
+
+                <!-- Карточка 2 -->
+                <div class="approach-card">
+                    <div class="approach-card__number">B</div>
+                    <div class="approach-card__body">
+                        <h3 class="approach-card__title">Систематизация</h3>
+                        <p class="approach-card__desc">Можно нарисовать идеальный экран, который сломается при первом же изменении контента. Я строю системы (токены, компоненты, правила), которые живут долго и не требуют постоянного тушения пожаров</p>
+                    </div>
+                </div>
+
+                <!-- Карточка 3 -->
+                <div class="approach-card">
+                    <div class="approach-card__number">C</div>
+                    <div class="approach-card__body">
+                        <h3 class="approach-card__title">Архитектура</h3>
+                        <p class="approach-card__desc">Многие боятся сложных интерфейсов и выкидывают половину функций. Я не боюсь. Я организую информацию так, чтобы новичок не испугался, а профи нашёл всё за 2 клика</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== КОНТАКТЫ ===== -->
+    <section class="contacts" id="contacts">
+        <div class="contacts__inner">
+            <!-- Title блок -->
+            <div class="contacts__title">
+                <div class="contacts__title-text">
+                    <span class="contacts__number">03</span>
+                    <span class="contacts__heading">Контакты</span>
+                </div>
+                <div class="scr_devider"></div>
+            </div>
+
+            <!-- Основной блок -->
+            <div class="contacts__card contacts__card--animated">
+                <div class="contacts__content">
+                    <h2 class="contacts__headline">Давайте<br>знакомиться!</h2>
+                    <p class="contacts__desc">Мой опыт в коммуникационном дизайне и моушене помогает создавать интерфейсы, которые не просто работают, но и удерживают внимание пользователя. Понимаю базовый JS, поэтому мои макеты в Figma собираются в чистый код без боли для разработки</p>
+                    <div class="contacts__socials">
+                        <a href="#" class="contacts__social contacts__social--tg">
+                            <img class="social-icon--default" src="elements/tg_b.svg" alt="Telegram" width="16" height="16">
+                            <img class="social-icon--hover" src="elements/tg_w.svg" alt="Telegram" width="16" height="16">
+                        </a>
+                        <a href="#" class="contacts__social contacts__social--vk">
+                            <img class="social-icon--default" src="elements/vk_b.svg" alt="VK" width="16" height="16">
+                            <img class="social-icon--hover" src="elements/vk_w.svg" alt="VK" width="16" height="16">
+                        </a>
+                        <a href="#" class="contacts__social contacts__social--wu">
+                            <img class="social-icon--default" src="elements/wu_b.svg" alt="WhatsApp" width="16" height="16">
+                            <img class="social-icon--hover" src="elements/wu_w.svg" alt="WhatsApp" width="16" height="16">
+                        </a>
+                    </div>
+                </div>
+                <a href="#" class="btn btn_resume">
+                    Скачать резюме
+                    <img class="btn__icon btn__icon--default" src="elements/pdf-black.svg" alt="" width="16" height="16">
+                    <img class="btn__icon btn__icon--hover" src="elements/pdf-white.svg" alt="" width="16" height="16">
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ФУТЕР ===== -->
+    <footer class="footer">
+        <div class="footer__inner">
+            <div class="footer__left">
+                <div class="footer__spin">
+                    <img src="elements/Spin_1.svg" alt="">
+                </div>
+                <div class="footer__logo">
+                    <img src="elements/Logo_2.svg" alt="Logo" width="61" height="24">
+                </div>
+            </div>
+            <div class="footer__right">
+                <div class="footer__info">
+                    <div class="footer__column">
+                        <span class="footer__label">E-MAIL</span>
+                        <a href="mailto:m.alanov@gmail.com" class="footer__link">m.alanov@gmail.com</a>
+                    </div>
+                    <div class="footer__column">
+                        <span class="footer__label">ELSEWHERE</span>
+                        <a href="#" class="footer__link">Linkedin</a>
+                    </div>
+                    <div class="footer__column">
+                        <span class="footer__label">LOCATION</span>
+                        <span class="footer__link">Moscow</span>
+                    </div>
+                </div>
+                <div class="footer__divider"></div>
+                <div class="footer__bottom">
+                    <span class="footer__copyright">© 2026 Маланов Михаил</span>
+                    <span class="footer__credit">Спроектировано с любовью</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

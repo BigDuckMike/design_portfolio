@@ -1,0 +1,25 @@
+{
+  "worktrees": {
+    "wt-1790774385249-1": {
+      "branch": "chipped-berry",
+      "path": "c:\\Users\\mmala\\Yandex.Disk\\Portfolio\\.gigacode_vsc\\worktrees\\chipped-berry",
+      "parentBranch": "main",
+      "createdAt": "2026-09-30T13:19:45.249Z",
+      "remote": "origin"
+    }
+  },
+  "sessions": {
+    "ses_f0d8764fcffeB66No4gWX0IVbC": {
+      "worktreeId": "wt-1790774385249-1",
+      "createdAt": "2026-09-30T13:19:45.477Z"
+    }
+  },
+  "tabOrder": {
+    "local": [
+      "pending:1"
+    ]
+  },
+  "worktreeOrder": [
+    "wt-1790774385249-1"
+  ]
+}
