@@ -1319,11 +1319,11 @@ main {
         font-size: 16px;
     }
 
-    /* Отключаем active эффект у вкладок в мобильной версии */
-    .cases-page__tab:not(.cases-page__tab--active):active {
-        background: transparent !important;
-        border-color: #1D1D1F !important;
-        color: #1D1D1F !important;
+    /* Отключаем :active и :hover на мобильных */
+    .cases-page__tab {
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+        user-select: none;
     }
 
     /* Горизонтальный скролл карточек */

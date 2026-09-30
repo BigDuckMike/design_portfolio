@@ -24,6 +24,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // ===== Кнопки вкладок: убираем :active стиль при клике в другое место =====
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.cases-page__tab')) {
+            tabs.forEach(tab => {
+                tab.style.background = '';
+                tab.style.borderColor = '';
+                tab.style.color = '';
+            });
+        }
+    });
+
     // ===== Мобильное меню =====
     const burger = document.querySelector('.burger');
     const mobileMenu = document.querySelector('.mobile-menu');
@@ -66,4 +77,33 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // ===== Вкладки: touch-обработчики для сброса :active на мобильных =====
+    tabs.forEach(tab => {
+        tab.addEventListener('touchstart', () => {
+            if (!tab.classList.contains('cases-page__tab--active')) {
+                tab.style.background = '#007AFF';
+                tab.style.borderColor = '#007AFF';
+                tab.style.color = '#F5F5F7';
+            }
+        }, { passive: true });
+        tab.addEventListener('touchend', (e) => {
+            const target = e.target.closest('.cases-page__tab');
+            if (!target.classList.contains('cases-page__tab--active')) {
+                target.style.background = '';
+                target.style.borderColor = '';
+                target.style.color = '';
+            }
+        });
+        // Сброс при скролле карточек
+        document.querySelector('.cases-list').addEventListener('touchstart', () => {
+            tabs.forEach(t => {
+                if (!t.classList.contains('cases-page__tab--active')) {
+                    t.style.background = '';
+                    t.style.borderColor = '';
+                    t.style.color = '';
+                }
+            });
+        }, { passive: true });
+    });
 });
