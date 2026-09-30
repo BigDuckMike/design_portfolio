@@ -1563,4 +1563,16 @@ body.menu-open {
         padding-top: 24px;
         align-items: flex-start;
     }
+
+    /* ===== КОНТАКТЫ СОЦСЕТИ МОБИЛЬНЫЕ ===== */
+    .contacts__social {
+        width: 48px;
+        height: 48px;
+    }
+
+    .contacts__social .social-icon--default,
+    .contacts__social .social-icon--hover {
+        width: 24px;
+        height: 24px;
+    }
 }
