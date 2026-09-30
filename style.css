@@ -1205,6 +1205,10 @@ main {
     transform: translateX(0);
 }
 
+body.menu-open {
+    overflow: hidden;
+}
+
 .mobile-menu__inner {
     position: absolute;
     top: 0;
