@@ -1435,11 +1435,11 @@ main {
     }
 
     .case-card__image img {
-        width: 495px;
-        height: 495px;
+        width: 600px;
+        height: 600px;
         object-fit: cover;
         display: block;
-        transform: translate(-73px, -50px);
+        transform: translate(0px, 40px);
         transition: none;
         margin: 0;
         padding: 0;
@@ -1450,9 +1450,9 @@ main {
     }
 
     .case-card__content:hover .case-card__image img {
-        width: 495px;
-        height: 495px;
-        transform: translate(-73px, -50px);
+        width: 600px;
+        height: 600px;
+        transform: translate(0px, 40px);
     }
 
     /* Motion tab padding */
