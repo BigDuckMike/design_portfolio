@@ -159,7 +159,7 @@ html, body {
     justify-content: space-between;
     max-width: 1440px;
     margin: 0 auto;
-    padding: 320px 16px 16px 16px;
+    padding: 128px 16px 16px 16px;
     width: 100%;
     gap: 24px;
 }
