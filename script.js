@@ -71,13 +71,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const caseCards = document.querySelectorAll('.case-card__content');
     caseCards.forEach(card => {
         card.addEventListener('click', (e) => {
-            // Не срабатываем, если клик по ссылке внутри
-            if (e.target.closest('a')) return;
+            // Останавливаем всплытие
+            e.stopPropagation();
             // Якорь на блок подход
             const target = document.querySelector('#approach');
             if (target) {
                 target.scrollIntoView({ behavior: 'smooth' });
             }
+        });
+    });
+
+    // Останавливаем клик на ссылке внутри карточки
+    const caseLinks = document.querySelectorAll('.case-card a');
+    caseLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.stopPropagation();
         });
     });
 });

@@ -1319,9 +1319,9 @@ main {
 
     /* Отключаем active эффект у вкладок в мобильной версии */
     .cases-page__tab:not(.cases-page__tab--active):active {
-        background: transparent;
-        border-color: #1D1D1F;
-        color: #1D1D1F;
+        background: transparent !important;
+        border-color: #1D1D1F !important;
+        color: #1D1D1F !important;
     }
 
     /* Горизонтальный скролл карточек */
@@ -1375,18 +1375,7 @@ main {
         position: relative;
     }
 
-    /* Прозрачный оверлей на всю карточку */
-    .case-card__content::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        border-radius: 16px;
-        z-index: 10;
-        pointer-events: none;
-    }
+
 
     .case-card__content:hover {
         min-height: auto;
