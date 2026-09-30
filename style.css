@@ -1464,4 +1464,96 @@ main {
     .cases-tab--motion {
         padding-bottom: 168px;
     }
+
+    /* ===== ПОДХОД МОБИЛЬНЫЙ ===== */
+    .approach {
+        padding: 120px 8px;
+    }
+
+    .approach__content {
+        flex-direction: column;
+        gap: 32px;
+        padding: 32px 0;
+    }
+
+    .approach__headline {
+        font-size: 32px;
+    }
+
+    .approach__side-block {
+        max-width: 100%;
+    }
+
+    .approach__side-text {
+        margin-bottom: 16px;
+    }
+
+    .approach__buttons {
+        flex-direction: column;
+    }
+
+    .approach__cards {
+        grid-template-columns: 1fr;
+    }
+
+    /* ===== КОНТАКТЫ МОБИЛЬНЫЕ ===== */
+    .contacts {
+        padding: 80px 8px;
+    }
+
+    .contacts__headline {
+        font-size: 32px;
+    }
+
+    .contacts__desc {
+        font-size: 14px;
+    }
+
+    .contacts__card {
+        padding: 32px;
+        margin-top: 32px;
+        gap: 32px;
+    }
+
+    .contacts__socials {
+        gap: 12px;
+    }
+
+    .btn_resume {
+        align-self: stretch;
+        text-align: center;
+    }
+
+    /* ===== ФУТЕР МОБИЛЬНЫЙ ===== */
+    .footer__spin,
+    .footer__logo {
+        display: none;
+    }
+
+    .footer__inner {
+        min-height: auto;
+        padding: 48px 16px 32px;
+    }
+
+    .footer__right {
+        position: static;
+        width: 100%;
+        height: auto;
+    }
+
+    .footer__info {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .footer__divider {
+        margin: 24px 0 0;
+    }
+
+    .footer__bottom {
+        flex-direction: column;
+        gap: 8px;
+        padding-top: 24px;
+        align-items: flex-start;
+    }
 }
