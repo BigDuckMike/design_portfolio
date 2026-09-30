@@ -1280,6 +1280,7 @@ body.menu-open {
         padding-top: 80px;
         padding-left: 8px;
         padding-right: 8px;
+        min-height: 100dvh;
     }
 
     .hero__top-bar-inner {
@@ -1299,7 +1300,9 @@ body.menu-open {
     }
 
     .hero__inner {
-        padding: 256px 0px 16px 0px;
+        padding: 0 8px;
+        margin-top: auto;
+        transform: translateY(-10%);
     }
 
     .hero__title {
