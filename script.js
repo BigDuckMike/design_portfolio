@@ -66,26 +66,4 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-
-    // ===== Клик по карточке кейса (мобилка) =====
-    const caseCards = document.querySelectorAll('.case-card__content');
-    caseCards.forEach(card => {
-        card.addEventListener('click', (e) => {
-            // Останавливаем всплытие
-            e.stopPropagation();
-            // Якорь на блок подход
-            const target = document.querySelector('#approach');
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth' });
-            }
-        });
-    });
-
-    // Останавливаем клик на ссылке внутри карточки
-    const caseLinks = document.querySelectorAll('.case-card a');
-    caseLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.stopPropagation();
-        });
-    });
 });

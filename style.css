@@ -476,6 +476,8 @@ main {
     min-height: 160px;
     transition: min-height 0.4s ease;
     cursor: pointer;
+    text-decoration: none;
+    color: inherit;
 }
 
 .case-card__content:hover {
@@ -1357,6 +1359,7 @@ main {
         flex-shrink: 0;
         width: 320px;
         padding: 8px;
+        margin-left: 8px;
         overflow: visible;
     }
 
@@ -1373,6 +1376,8 @@ main {
         cursor: pointer;
         transition: none;
         position: relative;
+        text-decoration: none;
+        color: inherit;
     }
 
 
