@@ -14,6 +14,33 @@ html, body {
     min-height: 100vh;
 }
 
+/* ===== ПРЕЛОАДЕР ===== */
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #E3E3E3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: transform 400ms ease-out;
+}
+
+.preloader.is-hidden {
+    transform: translateY(-100%);
+}
+
+.preloader__count {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: #1D1D1F;
+    letter-spacing: 0;
+}
+
 /* ===== ШАПКА ===== */
 .header {
     position: fixed;
@@ -148,20 +175,21 @@ html, body {
     width: 100%;
     height: 100%;
     z-index: 0;
-    /* TODO: здесь будет видео или canvas-анимация */
 }
 
 .hero__inner {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
     max-width: 1440px;
     margin: 0 auto;
-    padding: 128px 16px 16px 16px;
+    padding: 0 16px 16px;
     width: 100%;
     gap: 24px;
+    margin-top: auto;
+    transform: translateY(-20%);
 }
 
 .hero__left {
@@ -1143,6 +1171,102 @@ main {
     font-size: 14px;
     color: rgba(245, 245, 247, 0.6);
 }
+
+
+
+/* ===== АНИМАЦИИ ПОЯВЛЕНИЯ ===== */
+
+/* Все анимируемые элементы скрыты по умолчанию */
+.hero-animate {
+    opacity: 0;
+}
+
+/* --- Шапка: выезжает сверху --- */
+.header.hero-animate.is-visible {
+    animation: slideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- scr_devider: выезжает слева направо --- */
+.scr_devider.hero-animate.is-visible {
+    animation: slideRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideRight {
+    from {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* --- Элементы hero__top-bar-inner: появление с задержкой --- */
+.hero__top-bar-inner > .hero-animate {
+    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- hero__title: просто показываем, строки анимируются отдельно --- */
+.hero__title.hero-animate.is-visible {
+    opacity: 1;
+}
+
+/* --- hero__title: строки выезжают снизу --- */
+.hero__title .title-line {
+    opacity: 0;
+    animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    display: inline-block;
+}
+
+@keyframes slideUpFade {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+        filter: blur(4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+/* --- hero__subtitle, кнопки, hero__right --- */
+.hero__subtitle.hero-animate.is-visible,
+.hero__buttons.hero-animate.is-visible,
+.hero__right.hero-animate.is-visible {
+    animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Скрываем содержимое hero__title до добавления is-visible */
+.hero__title.hero-animate:not(.is-visible) .title-line {
+    opacity: 0 !important;
+}
+
+/* ===== КОНЕЦ АНИМАЦИЙ ===== */
 
 /* ===== МОБИЛЬНОЕ МЕНЮ ===== */
 .burger {

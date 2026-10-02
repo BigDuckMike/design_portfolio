@@ -12,8 +12,16 @@
 </head>
 <body>
 
+    <!-- ===== ПРЕЛОАДЕР ===== -->
+    <div class="preloader">
+        <span class="preloader__count">0%</span>
+    </div>
+
+    <!-- ===== КОНТЕНТ ===== -->
+    <div class="site-content">
+
     <!-- ===== ШАПКА ===== -->
-    <header class="header">
+    <header class="header hero-animate">
         <div class="header__inner">
             <a href="index.html" class="header__logo">
                 <img src="elements/Logo.svg" alt="Logo" width="91" height="24">
@@ -55,14 +63,14 @@
     <!-- ===== HERO ===== -->
     <section class="hero">
         <div class="hero__top-bar">
-            <div class="scr_devider"></div>
+            <div class="scr_devider hero-animate"></div>
             <div class="hero__top-bar-inner">
-                <span class="top-bar__left">Портфолио *26</span>
-                <div class="top-bar__right">
+                <span class="top-bar__left hero-animate">Портфолио *26</span>
+                <div class="top-bar__right hero-animate">
                     <img src="elements/indicator_on.svg" alt="" width="17" height="17">
                     <span>Готов к сотрудничеству</span>
                 </div>
-                <a href="about.html" class="hero__right hero__right-mobile">
+                <a href="about.html" class="hero__right hero__right-mobile hero-animate">
                     Обо мне
                     <img src="elements/arrow-right.svg" alt="">
                 </a>
@@ -72,9 +80,9 @@
         <div class="hero__bg"></div>
         <div class="hero__inner">
             <div class="hero__left">
-                <h1 class="hero__title">Превращаю<br>бизнес-требования<br>в интуитивные<br>интерфейсы</h1>
-                <p class="hero__subtitle">Мой опыт в коммуникационном дизайне и моушене помогает создавать интерфейсы, которые не просто работают, но и удерживают внимание пользователя. Понимаю базовый JS, поэтому мои макеты в Figma собираются в чистый код без боли для разработки</p>
-                <div class="hero__buttons">
+                <h1 class="hero__title hero-animate">Превращаю<br>бизнес-требования<br>в интуитивные<br>интерфейсы</h1>
+                <p class="hero__subtitle hero-animate">Мой опыт в коммуникационном дизайне и моушене помогает создавать интерфейсы, которые не просто работают, но и удерживают внимание пользователя. Понимаю базовый JS, поэтому мои макеты в Figma собираются в чистый код без боли для разработки</p>
+                <div class="hero__buttons hero-animate">
                     <a href="#cases" class="btn btn_primary_big_icon">
                         Кейсы
                         <img class="btn__icon btn__icon--default" src="elements/Arrow-white.svg" alt="">
@@ -83,7 +91,7 @@
                     <a href="#approach" class="btn btn_secondary_big">Подход</a>
                 </div>
             </div>
-            <a href="about.html" class="hero__right">
+            <a href="about.html" class="hero__right hero-animate">
                 Обо мне
                 <img src="elements/arrow-right.svg" alt="">
             </a>
@@ -474,6 +482,8 @@
             </div>
         </div>
     </footer>
+
+    </div><!-- /.site-content -->
 
 </body>
 </html>
