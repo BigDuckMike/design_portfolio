@@ -2,40 +2,65 @@
 (function() {
     const preloader = document.querySelector('.preloader');
     const countEl = document.querySelector('.preloader__count');
-    let progress = 0;
-    const duration = 1500; // общее время прелоадера (мс)
-    const interval = 30; // обновление каждые 30мс
-    const step = 100 / (duration / interval); // прирост за шаг
+    const progressBar = document.querySelector('.preloader__bar');
 
     // Блокируем скролл пока грузится прелоадер
     document.body.style.overflow = 'hidden';
 
-    const counter = setInterval(() => {
-        progress += step;
-        if (progress >= 100) {
-            progress = 100;
-            clearInterval(counter);
+    // Собираем все изображения со страницы
+    const images = Array.from(document.querySelectorAll('img'));
+    const imagePromises = images.map(img => {
+        return new Promise((resolve) => {
+            if (img.complete) return resolve();
+            img.addEventListener('load', resolve, { once: true });
+            img.addEventListener('error', resolve, { once: true });
+        });
+    });
+
+    // Ждём загрузки шрифта Montserrat
+    const fontPromise = document.fonts.ready.then(() => {});
+
+    // Запускаем все загрузки параллельно
+    Promise.all([...imagePromises, fontPromise]).then(() => {
+        animateProgress(100, () => {
+            // Скрываем прелоадер
+            preloader.classList.add('is-hidden');
             
-            // Прелоадер выполнен
+            // Показываем контент и запускаем анимации
             setTimeout(() => {
-                // Скрываем прелоадер
-                preloader.classList.add('is-hidden');
+                window.scrollTo(0, 0);
+                document.body.style.overflow = '';
+                startAnimations();
                 
-                // Показываем контент и запускаем анимации
+                // Удаляем прелоадер из DOM после анимации
                 setTimeout(() => {
-                    window.scrollTo(0, 0); // всегда в начало при загрузке
-                    document.body.style.overflow = ''; // возвращаем скролл
-                    startAnimations();
-                    
-                    // Удаляем прелоадер из DOM после анимации
-                    setTimeout(() => {
-                        preloader.remove();
-                    }, 400);
-                }, 100);
-            }, 200);
-        }
-        countEl.textContent = Math.round(progress) + '%';
-    }, interval);
+                    preloader.remove();
+                }, 400);
+            }, 100);
+        });
+    });
+
+    // Анимация прогресса от 0 до target
+    function animateProgress(target, onComplete) {
+        let current = 0;
+        const duration = 1200; // время анимации прелоадера (мс)
+        const interval = 30;
+        const totalSteps = duration / interval;
+        const step = target / totalSteps;
+
+        const counter = setInterval(() => {
+            current += step;
+            if (current >= target) {
+                current = target;
+                clearInterval(counter);
+                onComplete();
+            }
+            countEl.textContent = Math.round(current) + '%';
+            if (progressBar) {
+                progressBar.style.width = current + '%';
+            }
+        }, interval);
+    }
 })();
 
 // ===== ФУНКЦИЯ АНИМАЦИИ ПОЯВЛЕНИЯ ЭЛЕМЕНТОВ =====
