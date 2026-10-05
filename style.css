@@ -390,7 +390,10 @@ main {
 /* ===== СТРАНИЦА КЕЙСЫ ===== */
 .cases-page {
     padding-top: 64px;
-    padding-bottom: 64px;
+    position: relative;
+    top: 0;
+    z-index: 10;
+    background: #F5F5F7;
 }
 
 .cases-page__inner {
@@ -673,6 +676,10 @@ main {
     padding: 80px 16px;
     max-width: 1440px;
     margin: 0 auto;
+    background: #F5F5F7;
+    position: relative;
+    top: 0;
+    z-index: 25;
 }
 
 .contacts__inner {
@@ -703,6 +710,7 @@ main {
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     font-size: 14px;
+    padding-left: 16px;
     color: #1D1D1F;
 }
 
@@ -834,9 +842,13 @@ main {
 
 /* ===== СЕКЦИЯ ПОДХОД ===== */
 .approach {
-    padding: 182px 16px;
+    padding: 0 16px 182px 16px;
     max-width: 1440px;
     margin: 0 auto;
+    background: #F5F5F7;
+    position: relative;
+    top: 0;
+    z-index: 25;
 }
 
 .approach__inner {
@@ -867,6 +879,7 @@ main {
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     font-size: 14px;
+    padding-left: 16px;
     color: #1D1D1F;
 }
 
@@ -895,6 +908,20 @@ main {
     font-size: 48px;
     line-height: 1.2;
     letter-spacing: -0.02em;
+    color: #E3E3E3;
+}
+
+.approach__headline .word {
+    white-space: nowrap;
+}
+
+.approach__headline .letter {
+    display: inline-block;
+    color: #E3E3E3;
+    transition: color 0.15s ease;
+}
+
+.approach__headline .letter.active {
     color: #1D1D1F;
 }
 
@@ -1069,8 +1096,12 @@ main {
     min-height: 267px;
     background: linear-gradient(90deg, #007AFF 0%, #003D8D 100%);
     position: relative;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
     overflow: hidden;
 }
+
 
 .footer__inner {
     max-width: 1440px;
@@ -1197,19 +1228,19 @@ main {
     }
 }
 
-/* --- scr_devider: выезжает слева направо --- */
+/* --- scr_devider: расширяется от 0 до полной ширины --- */
 .scr_devider.hero-animate.is-visible {
-    animation: slideRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: expandWidth 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes slideRight {
+@keyframes expandWidth {
     from {
-        opacity: 0;
-        transform: translateX(-100%);
+        width: 0;
+        opacity: 1;
     }
     to {
+        width: 100%;
         opacity: 1;
-        transform: translateX(0);
     }
 }
 
@@ -1264,6 +1295,25 @@ main {
 /* Скрываем содержимое hero__title до добавления is-visible */
 .hero__title.hero-animate:not(.is-visible) .title-line {
     opacity: 0 !important;
+}
+
+/* --- page-title__text: начальное состояние --- */
+.page-title__text {
+    opacity: 0;
+    transform: translateX(-32px);
+    padding-bottom: 16px;
+}
+
+/* --- page-title .scr_devider: начальное состояние --- */
+.page-title .scr_devider {
+    width: 0;
+    opacity: 0;
+}
+
+/* --- approach__cards: начальное состояние --- */
+.approach-card {
+    opacity: 0;
+    transform: translateY(32px);
 }
 
 /* ===== КОНЕЦ АНИМАЦИЙ ===== */

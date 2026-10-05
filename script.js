@@ -7,6 +7,9 @@
     const interval = 30; // обновление каждые 30мс
     const step = 100 / (duration / interval); // прирост за шаг
 
+    // Блокируем скролл пока грузится прелоадер
+    document.body.style.overflow = 'hidden';
+
     const counter = setInterval(() => {
         progress += step;
         if (progress >= 100) {
@@ -20,6 +23,7 @@
                 
                 // Показываем контент и запускаем анимации
                 setTimeout(() => {
+                    window.scrollTo(0, 0); // всегда в начало при загрузке
                     document.body.style.overflow = ''; // возвращаем скролл
                     startAnimations();
                     
@@ -176,7 +180,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ===== Плавный скролл по якорям =====
+    // ===== Lenis — плавный скролл =====
+    const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        wheelMultiplier: 1,
+        touchMultiplier: 1,
+        autoRaf: true,
+        smoothWheel: true,
+    });
+
+    // Якорные ссылки через Lenis
     document.querySelectorAll('a[href^="#"]').forEach(link => {
         link.addEventListener('click', (e) => {
             const targetId = link.getAttribute('href');
@@ -186,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.preventDefault();
                 const headerHeight = document.querySelector('.header').offsetHeight;
                 const top = target.getBoundingClientRect().top + window.scrollY - headerHeight;
-                window.scrollTo({ top, behavior: 'smooth' });
+                lenis.scrollTo(top, { offset: -headerHeight });
             }
         });
     });
@@ -297,83 +311,130 @@ document.addEventListener('DOMContentLoaded', () => {
         }, interval);
     }
 
-    // ===== Dot grid animation (desktop only) =====
-    if (window.innerWidth > 720) {
-        const canvas = document.getElementById('dotGrid');
-        if (canvas) {
-            const ctx = canvas.getContext('2d');
-            let mouseX = -1000;
-            let mouseY = -1000;
+    // ===== Scroll-анимации: scr_devider, page-title__text, approach-card =====
+    const scrollAnimElements = [];
 
-            const dotSize = 2;
-            const spacing = 30;
-            const radius = 120;
-            const maxMove = 15;
+    document.querySelectorAll('.page-title .scr_devider').forEach(el => {
+        scrollAnimElements.push({ el, type: 'divider' });
+    });
+    document.querySelectorAll('.page-title__text').forEach(el => {
+        scrollAnimElements.push({ el, type: 'title' });
+    });
+    document.querySelectorAll('.approach-card').forEach(card => {
+        scrollAnimElements.push({ el: card, type: 'card' });
+    });
 
-            let dots = [];
-            let cols, rows;
+    function updateScrollAnimations() {
+        const viewH = window.innerHeight;
 
-            function resize() {
-                const hero = document.querySelector('.hero');
-                if (!hero) return;
-                canvas.width = hero.offsetWidth;
-                canvas.height = hero.offsetHeight;
+        scrollAnimElements.forEach(({ el, type }) => {
+            if (!el) return;
+            const rect = el.getBoundingClientRect();
+            const start = viewH * 0.9; // начало анимации
+            const end = viewH * 0.7;   // конец анимации
+            const progress = 1 - (rect.top - end) / (start - end);
+            const p = Math.max(0, Math.min(1, progress));
+            const eased = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2; // ease-in-out
 
-                cols = Math.ceil(canvas.width / spacing) + 1;
-                rows = Math.ceil(canvas.height / spacing) + 1;
+            if (type === 'divider') {
+                el.style.width = (eased * 100) + '%';
+                el.style.opacity = eased;
+            } else if (type === 'title') {
+                el.style.opacity = eased;
+                el.style.transform = `translateX(${-32 * (1 - eased)}px)`;
+            } else if (type === 'card') {
+                el.style.opacity = eased;
+                el.style.transform = `translateY(${32 * (1 - eased)}px)`;
+            }
+        });
+    }
 
-                dots = [];
-                for (let x = 0; x < cols; x++) {
-                    for (let y = 0; y < rows; y++) {
-                        dots.push({
-                            baseX: x * spacing,
-                            baseY: y * spacing,
-                            x: x * spacing,
-                            y: y * spacing
-                        });
-                    }
+    // Sync Lenis with scroll-based animations
+    lenis.on('scroll', () => {
+        // Scroll animations (scr_devider, approach__title-text, approach-card)
+        updateScrollAnimations();
+    });
+
+
+    // ===== Scroll-анимация approach__headline: посимвольное затемнение =====
+    const headline = document.querySelector('.approach__headline');
+    if (headline) {
+        const text = headline.textContent;
+        headline.innerHTML = '';
+
+        // Разбиваем по словам, буквы внутри слов оборачиваем в .letter
+        text.split(' ').forEach((word, wi) => {
+            const wordSpan = document.createElement('span');
+            wordSpan.className = 'word';
+            wordSpan.innerHTML = word.replace(/\S/g, "<span class='letter'>$&</span>");
+            headline.appendChild(wordSpan);
+
+            // Добавляем пробел после слова (кроме последнего)
+            if (wi < text.split(' ').length - 1) {
+                headline.appendChild(document.createTextNode(' '));
+            }
+        });
+
+        const letters = headline.querySelectorAll('.letter');
+        const viewH = window.innerHeight;
+        let ticking = false;
+
+        function updateLetters() {
+            const rect = headline.getBoundingClientRect();
+
+            // progress: 0 = текст у дна экрана, 1 = текст на 20% от верха (80% высоты экрана)
+            const progress = 1 - (rect.top - viewH * 0.2) / (viewH * 0.8);
+            const clamped = Math.max(0, Math.min(1, progress));
+
+            letters.forEach((letter, i) => {
+                const threshold = (i / letters.length) * 0.85;
+                if (clamped > threshold) {
+                    letter.classList.add('active');
+                } else {
+                    letter.classList.remove('active');
                 }
-            }
+            });
 
-            function onMouseMove(e) {
-                const rect = canvas.getBoundingClientRect();
-                mouseX = e.clientX - rect.left;
-                mouseY = e.clientY - rect.top;
-            }
-
-            function animate() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-                for (let dot of dots) {
-                    const dx = mouseX - dot.baseX;
-                    const dy = mouseY - dot.baseY;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-
-                    if (dist < radius && dist > 0) {
-                        const force = (radius - dist) / radius;
-                        const moveX = (dx / dist) * force * maxMove;
-                        const moveY = (dy / dist) * force * maxMove;
-                        dot.x = dot.baseX + moveX;
-                        dot.y = dot.baseY + moveY;
-                    } else {
-                        dot.x += (dot.baseX - dot.x) * 0.1;
-                        dot.y += (dot.baseY - dot.y) * 0.1;
-                    }
-
-                    ctx.beginPath();
-                    ctx.arc(dot.x, dot.y, dotSize, 0, Math.PI * 2);
-                    ctx.fillStyle = '#AAAAAA';
-                    ctx.fill();
-                }
-
-                requestAnimationFrame(animate);
-            }
-
-            window.addEventListener('resize', resize);
-            canvas.addEventListener('mousemove', onMouseMove);
-
-            resize();
-            animate();
+            ticking = false;
         }
+
+        lenis.on('scroll', () => {
+            const rect = headline.getBoundingClientRect();
+            const progress = 1 - (rect.top - viewH * 0.2) / (viewH * 0.8);
+            const clamped = Math.max(0, Math.min(1, progress));
+
+            letters.forEach((letter, i) => {
+                const threshold = (i / letters.length) * 0.85;
+                if (clamped > threshold) {
+                    letter.classList.add('active');
+                } else {
+                    letter.classList.remove('active');
+                }
+            });
+        });
+    }
+
+    // ===== Parallax для cases-page =====
+    const casesPage = document.querySelector('.cases-page');
+    const heroInner = document.querySelector('.hero__inner');
+    
+    if (casesPage) {
+        lenis.on('scroll', () => {
+            const scrollY = window.scrollY;
+            const heroHeight = document.querySelector('.hero').offsetHeight;
+            const triggerPoint = heroHeight - window.innerHeight;
+            
+            // cases-page — поднимается с ограничением
+            let offset = scrollY > triggerPoint ? (scrollY - triggerPoint) * 0.3 : 0;
+            offset = Math.min(offset, 677);
+            casesPage.style.top = `-${offset}px`;
+            
+            // hero__inner — blur + opacity при скролле
+            if (heroInner) {
+                const heroProgress = Math.min(scrollY / (heroHeight * 0.5), 1);
+                heroInner.style.opacity = 1 - heroProgress * 0.8;
+                heroInner.style.filter = `blur(${heroProgress * 8}px)`;
+            }
+        });
     }
 });
