@@ -1649,6 +1649,7 @@ body.menu-open {
     /* ===== ПОДХОД МОБИЛЬНЫЙ ===== */
     .approach {
         padding: 120px 8px;
+        margin-top: 64px;
     }
 
     .approach__content {
