@@ -220,12 +220,28 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', (e) => {
             const targetId = link.getAttribute('href');
             if (targetId === '#') return;
+            
+            // #top — скролл в самый верх
+            if (targetId === '#top') {
+                e.preventDefault();
+                lenis.scrollTo(0);
+                return;
+            }
+            
+            // #footer — скролл в самый низ
+            if (targetId === '#footer') {
+                e.preventDefault();
+                const scrollHeight = document.documentElement.scrollHeight;
+                lenis.scrollTo(scrollHeight);
+                return;
+            }
+            
             const target = document.querySelector(targetId);
             if (target) {
                 e.preventDefault();
                 const headerHeight = document.querySelector('.header').offsetHeight;
-                const top = target.getBoundingClientRect().top + window.scrollY - headerHeight;
-                lenis.scrollTo(top, { offset: -headerHeight });
+                const top = target.getBoundingClientRect().top + window.scrollY - headerHeight - 128;
+                lenis.scrollTo(top);
             }
         });
     });

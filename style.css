@@ -407,7 +407,7 @@ main {
 
 /* ===== СТРАНИЦА КЕЙСЫ ===== */
 .cases-page {
-    padding-top: 64px;
+    padding-top: 256px;
     position: relative;
     top: 0;
     z-index: 10;
