@@ -860,7 +860,7 @@ main {
 
 /* ===== СЕКЦИЯ ПОДХОД ===== */
 .approach {
-    padding: 0 16px 182px 16px;
+    padding: 256px 16px 128px 16px;
     max-width: 100%;
     background: #F5F5F7;
     position: relative;

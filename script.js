@@ -234,35 +234,63 @@ setTimeout(updateFooterPadding, 1500);
     });
 
     // Якорные ссылки через Lenis
-    document.querySelectorAll('a[href^="#"]').forEach(link => {
-        link.addEventListener('click', (e) => {
-            const targetId = link.getAttribute('href');
-            if (targetId === '#') return;
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+        const targetId = link.getAttribute('href');
+        if (targetId === '#') return;
+        
+        // #top — скролл в самый верх
+        if (targetId === '#top') {
+            e.preventDefault();
+            lenis.scrollTo(0);
+            return;
+        }
+        
+        // #footer — скролл в самый низ
+        if (targetId === '#footer') {
+            e.preventDefault();
+            const scrollHeight = document.documentElement.scrollHeight;
+            lenis.scrollTo(scrollHeight);
+            return;
+        }
+        
+        const target = document.querySelector(targetId);
+        if (target) {
+            e.preventDefault();
+            const headerHeight = document.querySelector('.header').offsetHeight;
             
-            // #top — скролл в самый верх
-            if (targetId === '#top') {
-                e.preventDefault();
-                lenis.scrollTo(0);
-                return;
+            // 1. Визуальная абсолютная позиция
+            const visualTop = target.getBoundingClientRect().top + window.scrollY;
+            
+            // 2. Вычисляем текущий offset параллакса (та же формула, что в parallax-блоке)
+            const heroHeight = document.querySelector('.hero').offsetHeight;
+            const triggerPoint = heroHeight - window.innerHeight;
+            const scrollY = window.scrollY;
+            let offset = scrollY > triggerPoint ? (scrollY - triggerPoint) * 0.3 : 0;
+            const maxOffset = window.innerWidth <= 720 ? 250 : 677;
+            offset = Math.min(offset, maxOffset);
+            
+            // 3. Если элемент внутри сдвинутого блока — компенсируем сдвиг
+            let realTop = visualTop;
+            if (target.closest('.cases-page') || target.closest('.approach')) {
+                realTop = visualTop + offset;
             }
             
-            // #footer — скролл в самый низ
-            if (targetId === '#footer') {
-                e.preventDefault();
-                const scrollHeight = document.documentElement.scrollHeight;
-                lenis.scrollTo(scrollHeight);
-                return;
+            // 4. Базовый offset
+            let adjustment = -headerHeight - 128;
+            
+            // 5. Индивидуальные корректировки
+            if (targetId === '#cases') {
+                adjustment += 64;   // блок окажется выше на 64px
+            } else if (targetId === '#approach') {
+                adjustment -= 128;  // блок окажется ниже на 128px
             }
             
-            const target = document.querySelector(targetId);
-            if (target) {
-                e.preventDefault();
-                // offsetTop берёт позицию в потоке документа, не зависит от параллакс-сдвига
-                const targetTop = target.offsetTop - 128;
-                lenis.scrollTo(targetTop);
-            }
-        });
+            // 6. Скроллим к реальной позиции
+            lenis.scrollTo(realTop + adjustment);
+        }
     });
+});
 
     // ===== Кнопки вкладок: сброс :active =====
     document.addEventListener('click', (e) => {
