@@ -126,6 +126,24 @@ function startAnimations() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+
+    // ===== Footer Reveal: динамический отступ для body =====
+function updateFooterPadding() {
+    const footer = document.querySelector('.footer');
+    if (footer) {
+        // padding-bottom = высоте футера, чтобы был куда скроллить
+        document.body.style.paddingBottom = footer.offsetHeight + 'px';
+    }
+}
+
+// Вызываем при загрузке и при ресайзе (для мобильной версии)
+updateFooterPadding();
+window.addEventListener('resize', updateFooterPadding);
+
+// Также обновляем после скрытия прелоадера (шрифты могут повлиять на высоту)
+setTimeout(updateFooterPadding, 1500);
+
+
     // ===== АНИМАЦИЯ ПОЯВЛЕНИЯ ЭЛЕМЕНТОВ =====
     const animationDelay = 100; // задержка между элементами (мс)
     const baseDelay = 200; // начальная задержка перед стартом
@@ -239,9 +257,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const target = document.querySelector(targetId);
             if (target) {
                 e.preventDefault();
-                const headerHeight = document.querySelector('.header').offsetHeight;
-                const top = target.getBoundingClientRect().top + window.scrollY - headerHeight - 128;
-                lenis.scrollTo(top);
+                // offsetTop берёт позицию в потоке документа, не зависит от параллакс-сдвига
+                const targetTop = target.offsetTop - 128;
+                lenis.scrollTo(targetTop);
             }
         });
     });
@@ -455,27 +473,38 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ===== Parallax для cases-page =====
-    const casesPage = document.querySelector('.cases-page');
-    const heroInner = document.querySelector('.hero__inner');
-    
-    if (casesPage) {
-        lenis.on('scroll', () => {
-            const scrollY = window.scrollY;
-            const heroHeight = document.querySelector('.hero').offsetHeight;
-            const triggerPoint = heroHeight - window.innerHeight;
-            
-            // cases-page — поднимается с ограничением
-            let offset = scrollY > triggerPoint ? (scrollY - triggerPoint) * 0.3 : 0;
-            offset = Math.min(offset, 677);
-            casesPage.style.top = `-${offset}px`;
-            
-            // hero__inner — blur + opacity при скролле
-            if (heroInner) {
-                const heroProgress = Math.min(scrollY / (heroHeight * 0.5), 1);
-                heroInner.style.opacity = 1 - heroProgress * 0.8;
-                heroInner.style.filter = `blur(${heroProgress * 8}px)`;
-            }
-        });
-    }
+  // ===== Parallax для cases-page =====
+const casesPage = document.querySelector('.cases-page');
+const heroInner = document.querySelector('.hero__inner');
+
+// Подтягиваем ТОЛЬКО первый блок после кейсов (approach)
+// contacts и footer пойдут за ним автоматически в нормальном потоке
+const followingSection = document.querySelector('.approach');
+
+if (casesPage) {
+    lenis.on('scroll', () => {
+        const scrollY = window.scrollY;
+        const heroHeight = document.querySelector('.hero').offsetHeight;
+        const triggerPoint = heroHeight - window.innerHeight;
+
+        let offset = scrollY > triggerPoint ? (scrollY - triggerPoint) * 0.3 : 0;
+        const maxOffset = window.innerWidth <= 720 ? 250 : 677;
+        offset = Math.min(offset, maxOffset);
+
+        // Двигаем блок кейсов (визуально)
+        casesPage.style.top = `-${offset}px`;
+
+        // Подтягиваем только approach, закрывая "дыру" в потоке
+        if (followingSection) {
+            followingSection.style.marginTop = `-${offset}px`;
+        }
+
+        // hero__inner — blur + opacity при скролле
+        if (heroInner) {
+            const heroProgress = Math.min(scrollY / (heroHeight * 0.5), 1);
+            heroInner.style.opacity = 1 - heroProgress * 0.8;
+            heroInner.style.filter = `blur(${heroProgress * 8}px)`;
+        }
+    });
+}
 });
