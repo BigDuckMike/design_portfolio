@@ -1436,8 +1436,198 @@ body.menu-open {
     color: #007AFF;
 }
 
-/* ===== АДАПТИВ ≤ 720px ===== */
-@media (max-width: 720px) {
+/* ===== ПЛАНШЕТ 761px–1024px ===== */
+@media (min-width: 761px) and (max-width: 1024px) {
+    .header__inner {
+        padding: 16px;
+    }
+
+    .hero {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .hero__inner {
+        padding: 0 16px 16px;
+    }
+
+    .hero__title {
+        font-size: 48px;
+    }
+
+    .hero__subtitle {
+        font-size: 14px;
+    }
+
+    /* Кейсы — десктопный вариант */
+    .cases-page {
+        padding-top: 192px;
+    }
+
+    .cases-page__inner {
+        padding: 0 16px;
+    }
+
+    .case-card__image {
+        width: 320px;
+        height: 140px;
+    }
+
+    .case-card__image img {
+        width: 400px;
+        height: 400px;
+    }
+
+    .case-card__content:hover .case-card__image {
+        height: 320px;
+    }
+
+    .case-card__content:hover .case-card__image img {
+        width: 480px;
+        height: 480px;
+    }
+
+    .cases-tab--motion {
+        padding-bottom: 160px;
+    }
+
+    /* Подход — планшетный вариант */
+    .approach {
+        padding: 192px 16px 128px;
+    }
+
+    .approach__inner {
+        padding: 0 16px;
+    }
+
+    .approach__content {
+        flex-direction: column;
+        gap: 32px;
+        padding: 48px 0;
+    }
+
+    .approach__headline {
+        font-size: 40px;
+    }
+
+    .approach__side-block {
+        max-width: 360px;
+    }
+
+    .approach__buttons {
+        flex-direction: column;
+    }
+
+    .approach__cards {
+        grid-template-columns: 1fr;
+    }
+
+    /* Контакты — десктопный вариант */
+    .contacts {
+        padding: 80px 16px;
+    }
+
+    .contacts__inner {
+        padding: 0 16px;
+    }
+
+    .contacts__headline {
+        font-size: 40px;
+    }
+
+    .contacts__card {
+        padding: 40px;
+    }
+
+    /* ===== ФУТЕР ПЛАНШЕТНЫЙ ===== */
+    .footer {
+        min-height: 0;
+    }
+
+    .footer__inner {
+        min-height: 0;
+        padding: 64px 16px 48px;
+    }
+
+    .footer__left {
+        display: none;
+    }
+
+    .footer__right {
+        position: static;
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .footer__info {
+        flex-direction: row;
+        gap: 48px;
+        margin-bottom: 48px;
+    }
+
+    .footer__column {
+        flex: 1;
+    }
+
+    .footer__divider {
+        margin: 0 0 48px;
+    }
+
+    .footer__bottom {
+        flex-direction: row;
+        justify-content: space-between;
+        padding-top: 0;
+    }
+}
+
+/* ===== БОЛЬШОЙ ПЛАНШЕТ / МАЛЫЙ ДЕСКТОП 1025px–1325px ===== */
+@media (min-width: 1025px) and (max-width: 1325px) {
+    .footer {
+        min-height: 0;
+    }
+
+    .footer__inner {
+        min-height: 0;
+        padding: 64px 16px 48px;
+    }
+
+    .footer__left {
+        display: none;
+    }
+
+    .footer__right {
+        position: static;
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .footer__info {
+        flex-direction: row;
+        gap: 48px;
+        margin-bottom: 48px;
+    }
+
+    .footer__column {
+        flex: 1;
+    }
+
+    .footer__divider {
+        margin: 0 0 48px;
+    }
+
+    .footer__bottom {
+        flex-direction: row;
+        justify-content: space-between;
+        padding-top: 0;
+    }
+}
+
+/* ===== АДАПТИВ ≤ 760px ===== */
+@media (max-width: 760px) {
     .header {
         padding: 0;
     }
