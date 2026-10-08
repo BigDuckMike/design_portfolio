@@ -270,9 +270,12 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
             const maxOffset = window.innerWidth <= 720 ? 250 : 677;
             offset = Math.min(offset, maxOffset);
             
-            // 3. Если элемент внутри сдвинутого блока — компенсируем сдвиг
+            // 3. Если элемент внутри сдвинутого блока — компенсируем сдвиг.
+            // Компенсация нужна и для .approach (сдвигается через top),
+            // и для .cases-page (сдвигается через отрицательный margin-top) —
+            // оба блока визуально подняты на одну и ту же величину offset.
             let realTop = visualTop;
-            if (target.closest('.approach') || target.closest('.cases-page')) {
+            if (target.closest('.approach, .cases-page')) {
                 realTop = visualTop + offset;
             }
             
@@ -281,9 +284,9 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
             
             // 5. Индивидуальные корректировки
             if (targetId === '#cases') {
-                adjustment += 64;   // блок окажется выше на 64px
+                adjustment -= 256;  // блок окажется выше
             } else if (targetId === '#approach') {
-                adjustment -= 128;  // блок окажется ниже на 128px
+                adjustment -= 16;   // блок окажется ниже на 64px
             }
             
             // 6. Скроллим к реальной позиции
