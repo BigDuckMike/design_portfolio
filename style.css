@@ -408,9 +408,8 @@ main {
 
 /* ===== СТРАНИЦА КЕЙСЫ ===== */
 .cases-page {
-    padding-top: 256px;
+    padding: 128px 16px;
     position: relative;
-    top: 0;
     z-index: 10;
     background: #F5F5F7;
 }
@@ -692,7 +691,7 @@ main {
 
 /* ===== СЕКЦИЯ КОНТАКТЫ ===== */
 .contacts {
-    padding: 80px 16px;
+    padding: 128px 16px;
     max-width: 100%;
     background: #F5F5F7;
     position: relative;
@@ -860,7 +859,7 @@ main {
 
 /* ===== СЕКЦИЯ ПОДХОД ===== */
 .approach {
-    padding: 256px 16px 128px 16px;
+    padding: 128px 16px 128px 16px;
     max-width: 100%;
     background: #F5F5F7;
     position: relative;
@@ -1461,7 +1460,7 @@ body.menu-open {
 
     /* Кейсы — десктопный вариант */
     .cases-page {
-        padding-top: 192px;
+        padding-top: 64px;
     }
 
     .cases-page__inner {
@@ -1493,7 +1492,7 @@ body.menu-open {
 
     /* Подход — планшетный вариант */
     .approach {
-        padding: 192px 16px 128px;
+        padding: 128px 16px;
     }
 
     .approach__inner {
@@ -1856,8 +1855,7 @@ body.menu-open {
 
     /* ===== ПОДХОД МОБИЛЬНЫЙ ===== */
     .approach {
-        padding: 120px 8px;
-        margin-top: 64px;
+        padding: 128px 8px;
     }
 
     .approach__content {

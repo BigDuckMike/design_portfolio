@@ -272,7 +272,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
             
             // 3. Если элемент внутри сдвинутого блока — компенсируем сдвиг
             let realTop = visualTop;
-            if (target.closest('.cases-page') || target.closest('.approach')) {
+            if (target.closest('.approach') || target.closest('.cases-page')) {
                 realTop = visualTop + offset;
             }
             
@@ -501,15 +501,14 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
         });
     }
 
-  // ===== Parallax для cases-page =====
-const casesPage = document.querySelector('.cases-page');
+  // ===== Parallax для approach =====
+const approach = document.querySelector('.approach');
 const heroInner = document.querySelector('.hero__inner');
 
-// Подтягиваем ТОЛЬКО первый блок после кейсов (approach)
-// contacts и footer пойдут за ним автоматически в нормальном потоке
-const followingSection = document.querySelector('.approach');
+// Подтягиваем ТОЛЬКО первый блок после подход (cases)
+const followingSection = document.querySelector('.cases-page');
 
-if (casesPage) {
+if (approach) {
     lenis.on('scroll', () => {
         const scrollY = window.scrollY;
         const heroHeight = document.querySelector('.hero').offsetHeight;
@@ -519,10 +518,10 @@ if (casesPage) {
         const maxOffset = window.innerWidth <= 720 ? 250 : 677;
         offset = Math.min(offset, maxOffset);
 
-        // Двигаем блок кейсов (визуально)
-        casesPage.style.top = `-${offset}px`;
+        // Двигаем блок подход (визуально)
+        approach.style.top = `-${offset}px`;
 
-        // Подтягиваем только approach, закрывая "дыру" в потоке
+        // Подтягиваем только cases, закрывая "дыру" в потоке
         if (followingSection) {
             followingSection.style.marginTop = `-${offset}px`;
         }
