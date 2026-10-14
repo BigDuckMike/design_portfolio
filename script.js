@@ -122,6 +122,34 @@ function startAnimations() {
         if (heroRight) {
             setTimeout(() => heroRight.classList.add('is-visible'), contentDelay + animationDelay * 2);
         }
+
+        // 6. case-hero (страницы кейсов)
+        const caseHeroTitle = document.querySelector('.case-hero__title');
+        if (caseHeroTitle) {
+            const caseHtml = caseHeroTitle.innerHTML;
+            const caseLines = caseHtml.split('<br>');
+            caseHeroTitle.innerHTML = caseLines.map((line, i) => 
+                `<span class="title-line" style="animation-delay: ${baseDelay + caseLines.length * animationDelay + i * animationDelay}ms">${line}</span>${i < caseLines.length - 1 ? '<br>' : ''}`
+            ).join('');
+            
+            const caseDivider = document.querySelector('.case-hero__top-bar .scr_devider');
+            if (caseDivider) {
+                setTimeout(() => caseDivider.classList.add('is-visible'), baseDelay + animationDelay);
+            }
+
+            setTimeout(() => caseHeroTitle.classList.add('is-visible'), baseDelay + animationDelay * 5);
+
+            const caseDesc = document.querySelector('.case-hero__desc');
+            const caseInfo = document.querySelector('.case-hero__info');
+            const caseContentDelay = baseDelay + (caseLines.length * animationDelay * 2);
+            
+            if (caseInfo) {
+                setTimeout(() => caseInfo.classList.add('is-visible'), caseContentDelay);
+            }
+            if (caseDesc) {
+                setTimeout(() => caseDesc.classList.add('is-visible'), caseContentDelay + animationDelay);
+            }
+        }
     }, 100);
 }
 
@@ -199,6 +227,15 @@ setTimeout(updateFooterPadding, 1500);
         if (heroRight) {
             setTimeout(() => heroRight.classList.add('animate'), contentDelay + animationDelay * 2);
         }
+
+        // case-hero (страницы кейсов)
+        const caseHeroTitle = document.querySelector('.case-hero__title');
+        if (caseHeroTitle) {
+            const caseDivider = document.querySelector('.case-hero__top-bar .scr_devider');
+            if (caseDivider) {
+                setTimeout(() => caseDivider.classList.add('animate'), baseDelay + animationDelay);
+            }
+        }
     }, 100);
 
     const tabs = document.querySelectorAll('.cases-page__tab');
@@ -257,18 +294,24 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
         const target = document.querySelector(targetId);
         if (target) {
             e.preventDefault();
-            const headerHeight = document.querySelector('.header').offsetHeight;
+            const header = document.querySelector('.header');
+            if (!header) return;
+            const headerHeight = header.offsetHeight;
             
             // 1. Визуальная абсолютная позиция
             const visualTop = target.getBoundingClientRect().top + window.scrollY;
             
             // 2. Вычисляем текущий offset параллакса (та же формула, что в parallax-блоке)
-            const heroHeight = document.querySelector('.hero').offsetHeight;
-            const triggerPoint = heroHeight - window.innerHeight;
-            const scrollY = window.scrollY;
-            let offset = scrollY > triggerPoint ? (scrollY - triggerPoint) * 0.3 : 0;
-            const maxOffset = window.innerWidth <= 720 ? 250 : 677;
-            offset = Math.min(offset, maxOffset);
+            const hero = document.querySelector('.hero');
+            let offset = 0;
+            if (hero) {
+                const heroHeight = hero.offsetHeight;
+                const triggerPoint = heroHeight - window.innerHeight;
+                const scrollY = window.scrollY;
+                offset = scrollY > triggerPoint ? (scrollY - triggerPoint) * 0.3 : 0;
+                const maxOffset = window.innerWidth <= 720 ? 250 : 677;
+                offset = Math.min(offset, maxOffset);
+            }
             
             // 3. Если элемент внутри сдвинутого блока — компенсируем сдвиг.
             // Компенсация нужна и для .approach (сдвигается через top),
@@ -413,6 +456,12 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     document.querySelectorAll('.approach-card').forEach(card => {
         scrollAnimElements.push({ el: card, type: 'card' });
     });
+    document.querySelectorAll('.case-content__title-row').forEach(el => {
+        scrollAnimElements.push({ el, type: 'case-title' });
+    });
+    document.querySelectorAll('.case-content .scr_devider').forEach(el => {
+        scrollAnimElements.push({ el, type: 'divider' });
+    });
 
     function updateScrollAnimations() {
         const viewH = window.innerHeight;
@@ -430,6 +479,9 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
                 el.style.width = (eased * 100) + '%';
                 el.style.opacity = eased;
             } else if (type === 'title') {
+                el.style.opacity = eased;
+                el.style.transform = `translateX(${-32 * (1 - eased)}px)`;
+            } else if (type === 'case-title') {
                 el.style.opacity = eased;
                 el.style.transform = `translateX(${-32 * (1 - eased)}px)`;
             } else if (type === 'card') {
@@ -514,7 +566,10 @@ const followingSection = document.querySelector('.cases-page');
 if (approach) {
     lenis.on('scroll', () => {
         const scrollY = window.scrollY;
-        const heroHeight = document.querySelector('.hero').offsetHeight;
+        const hero = document.querySelector('.hero');
+        if (!hero) return;
+        
+        const heroHeight = hero.offsetHeight;
         const triggerPoint = heroHeight - window.innerHeight;
 
         let offset = scrollY > triggerPoint ? (scrollY - triggerPoint) * 0.3 : 0;
