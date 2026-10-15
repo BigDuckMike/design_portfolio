@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Страница в разработке</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .error-404 {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .error-404__inner {
+            text-align: center;
+            max-width: 500px;
+        }
+
+        .error-404__number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 160px;
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -8px;
+            color: #1D1D1F;
+            margin: 0;
+        }
+
+        .error-404__title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.3;
+            letter-spacing: -0.56px;
+            color: #1D1D1F;
+            margin: 24px 0 16px;
+        }
+
+        .error-404__desc {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1.4;
+            letter-spacing: -0.32px;
+            color: #1D1D1F;
+            margin: 0 0 40px;
+        }
+
+        .error-404__btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding-left: 24px;
+        }
+    </style>
+</head>
+<body>
+
+    <section class="error-404">
+        <div class="error-404__inner">
+            <h1 class="error-404__number">404</h1>
+            <h2 class="error-404__title">Страница в&nbsp;разработке</h2>
+            <p class="error-404__desc">Вернитесь назад — там тоже интересно.</p>
+            <button onclick="history.back()" class="btn btn_primary_big_icon error-404__btn">
+                Назад
+            </button>
+        </div>
+    </section>
+
+</body>
+</html>

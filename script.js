@@ -270,84 +270,134 @@ setTimeout(updateFooterPadding, 1500);
         smoothWheel: true,
     });
 
-    // Якорные ссылки через Lenis
+    // ===== Parallax для approach =====
+const approach = document.querySelector('.approach');
+const heroInner = document.querySelector('.hero__inner');
+const followingSection = document.querySelector('.cases-page');
+
+let parallaxLocked = false;
+
+function applyParallax() {
+    if (!approach) return;
+    if (parallaxLocked) return;
+
+    const scrollY = window.scrollY;
+    const hero = document.querySelector('.hero');
+    if (!hero) return;
+
+    const heroHeight = hero.offsetHeight;
+    const triggerPoint = heroHeight - window.innerHeight;
+
+    let offset = scrollY > triggerPoint ? (scrollY - triggerPoint) * 0.3 : 0;
+    const maxOffset = window.innerWidth <= 720 ? 250 : 677;
+    offset = Math.min(offset, maxOffset);
+
+    approach.style.top = `-${offset}px`;
+
+    if (followingSection) {
+        followingSection.style.marginTop = `-${offset}px`;
+    }
+
+    if (heroInner) {
+        const heroProgress = Math.min(scrollY / (heroHeight * 0.5), 1);
+        heroInner.style.opacity = 1 - heroProgress * 0.8;
+        heroInner.style.filter = `blur(${heroProgress * 8}px)`;
+    }
+}
+
+if (approach) {
+    lenis.on('scroll', applyParallax);
+}
+
+    // ===== Якорные ссылки =====
 document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', (e) => {
         const targetId = link.getAttribute('href');
         if (targetId === '#') return;
-        
-        // #top — скролл в самый верх
+        e.preventDefault();
+
+        // Закрываем мобильное меню
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const burger = document.querySelector('.burger');
+        if (mobileMenu && burger) {
+            mobileMenu.classList.remove('is-active');
+            burger.classList.remove('is-active');
+            document.body.classList.remove('menu-open');
+        }
+
+        const header = document.querySelector('.header');
+        const headerHeight = header ? header.offsetHeight : 0;
+
+        // #top
         if (targetId === '#top') {
-            e.preventDefault();
-            lenis.scrollTo(0);
+            smoothScrollTo(0);
             return;
         }
-        
-        // #footer — скролл в самый низ
+
+        // #footer — в самый низ
         if (targetId === '#footer') {
-            e.preventDefault();
-            const scrollHeight = document.documentElement.scrollHeight;
-            lenis.scrollTo(scrollHeight);
+            smoothScrollTo(document.documentElement.scrollHeight);
             return;
         }
-        
+
         const target = document.querySelector(targetId);
-        if (target) {
-            e.preventDefault();
-            const header = document.querySelector('.header');
-            if (!header) return;
-            const headerHeight = header.offsetHeight;
-            
-            // Получаем визуальную позицию элемента относительно viewport
-            const rect = target.getBoundingClientRect();
-            
-            // Вычисляем абсолютную позицию на странице с учётом текущего скролла
-            const absoluteTop = rect.top + window.scrollY;
-            
-            // Вычисляем offset параллакса для компенсации сдвинутых блоков
-            const hero = document.querySelector('.hero');
-            let offset = 0;
-            if (hero) {
-                const heroHeight = hero.offsetHeight;
-                const triggerPoint = heroHeight - window.innerHeight;
-                const scrollY = window.scrollY;
-                offset = scrollY > triggerPoint ? (scrollY - triggerPoint) * 0.3 : 0;
-                const maxOffset = window.innerWidth <= 720 ? 250 : 677;
-                offset = Math.min(offset, maxOffset);
-            }
-            
-            // Если элемент внутри сдвинутого блока — компенсируем сдвиг
-            let scrollTarget = absoluteTop;
-            if (target.closest('.approach, .cases-page')) {
-                scrollTarget = absoluteTop + offset;
-            }
-            
-            // Скроллим с учётом высоты хедера
-            lenis.scrollTo(scrollTarget - headerHeight, {
-                onComplete: () => {
-                    // Закрываем мобильное меню после завершения скролла
-                    const mobileMenu = document.querySelector('.mobile-menu');
-                    const burger = document.querySelector('.burger');
-                    if (mobileMenu && burger) {
-                        mobileMenu.classList.remove('is-active');
-                        burger.classList.remove('is-active');
-                        document.body.classList.remove('menu-open');
-                    }
-                }
-            });
-        } else {
-            // Целевой элемент не найден (например, #approach на странице кейса)
-            // Просто закрываем мобильное меню, если оно открыто
-            const mobileMenu = document.querySelector('.mobile-menu');
-            const burger = document.querySelector('.burger');
-            if (mobileMenu && burger) {
-                mobileMenu.classList.remove('is-active');
-                burger.classList.remove('is-active');
-                document.body.classList.remove('menu-open');
-            }
-        }
+        if (!target) return;
+
+        // Первый проход: скроллим "на глаз"
+        const rect = target.getBoundingClientRect();
+        const firstTarget = rect.top + window.scrollY - headerHeight;
+
+        smoothScrollTo(firstTarget, () => {
+            // После завершения — корректируем позицию (1-2 итерации)
+            correctPosition(target, headerHeight);
+        });
     });
 });
+
+// ===== Плавный скролл с блокировкой параллакса =====
+function smoothScrollTo(y, onComplete) {
+    parallaxLocked = true;
+
+    lenis.scrollTo(y, {
+        duration: 0.8,
+        onComplete: () => {
+            // Ждём кадр, чтобы layout устоялся, и только потом разблокируем
+            requestAnimationFrame(() => {
+                applyParallax(); // применяем параллакс один раз по финальному scrollY
+                parallaxLocked = false;
+
+                if (onComplete) onComplete();
+            });
+        }
+    });
+}
+
+// ===== Итеративная коррекция позиции =====
+function correctPosition(target, headerHeight, attempt = 0) {
+    if (attempt > 3) return; // защита от зацикливания
+
+    const rect = target.getBoundingClientRect();
+    const diff = rect.top - headerHeight;
+
+    // Если попали в допуск ±4px — готово
+    if (Math.abs(diff) <= 4) return;
+
+    const newY = window.scrollY + diff;
+
+    parallaxLocked = true;
+    lenis.scrollTo(newY, {
+        duration: 0.4,
+        onComplete: () => {
+            requestAnimationFrame(() => {
+                applyParallax();
+                parallaxLocked = false;
+                // Ещё одна проверка — рекурсивно
+                correctPosition(target, headerHeight, attempt + 1);
+            });
+        }
+    });
+}
+
 
     // ===== Кнопки вкладок: сброс :active =====
     document.addEventListener('click', (e) => {
@@ -563,40 +613,4 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
         });
     }
 
-  // ===== Parallax для approach =====
-const approach = document.querySelector('.approach');
-const heroInner = document.querySelector('.hero__inner');
-
-// Подтягиваем ТОЛЬКО первый блок после подход (cases)
-const followingSection = document.querySelector('.cases-page');
-
-if (approach) {
-    lenis.on('scroll', () => {
-        const scrollY = window.scrollY;
-        const hero = document.querySelector('.hero');
-        if (!hero) return;
-        
-        const heroHeight = hero.offsetHeight;
-        const triggerPoint = heroHeight - window.innerHeight;
-
-        let offset = scrollY > triggerPoint ? (scrollY - triggerPoint) * 0.3 : 0;
-        const maxOffset = window.innerWidth <= 720 ? 250 : 677;
-        offset = Math.min(offset, maxOffset);
-
-        // Двигаем блок подход (визуально)
-        approach.style.top = `-${offset}px`;
-
-        // Подтягиваем только cases, закрывая "дыру" в потоке
-        if (followingSection) {
-            followingSection.style.marginTop = `-${offset}px`;
-        }
-
-        // hero__inner — blur + opacity при скролле
-        if (heroInner) {
-            const heroProgress = Math.min(scrollY / (heroHeight * 0.5), 1);
-            heroInner.style.opacity = 1 - heroProgress * 0.8;
-            heroInner.style.filter = `blur(${heroProgress * 8}px)`;
-        }
-    });
-}
 });
