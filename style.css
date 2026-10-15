@@ -1559,6 +1559,20 @@ main {
     gap: 16px;
 }
 
+.case-content__text-content p {
+    color: #1D1D1F;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: -0.32px;
+    margin: 0;
+}
+
+.case-content__text-content p:last-child {
+    margin-bottom: 0;
+}
+
 .case-content__subheadline {
     color: #1D1D1F;
     font-family: 'Montserrat', sans-serif;
@@ -1581,7 +1595,7 @@ main {
 
 .case-content__bulits {
     list-style: none;
-    padding: 0;
+    padding-bottom: 16px;
     margin: 0;
 }
 
