@@ -298,10 +298,13 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
             if (!header) return;
             const headerHeight = header.offsetHeight;
             
-            // 1. Визуальная абсолютная позиция
-            const visualTop = target.getBoundingClientRect().top + window.scrollY;
+            // Получаем визуальную позицию элемента относительно viewport
+            const rect = target.getBoundingClientRect();
             
-            // 2. Вычисляем текущий offset параллакса (та же формула, что в parallax-блоке)
+            // Вычисляем абсолютную позицию на странице с учётом текущего скролла
+            const absoluteTop = rect.top + window.scrollY;
+            
+            // Вычисляем offset параллакса для компенсации сдвинутых блоков
             const hero = document.querySelector('.hero');
             let offset = 0;
             if (hero) {
@@ -313,27 +316,35 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
                 offset = Math.min(offset, maxOffset);
             }
             
-            // 3. Если элемент внутри сдвинутого блока — компенсируем сдвиг.
-            // Компенсация нужна и для .approach (сдвигается через top),
-            // и для .cases-page (сдвигается через отрицательный margin-top) —
-            // оба блока визуально подняты на одну и ту же величину offset.
-            let realTop = visualTop;
+            // Если элемент внутри сдвинутого блока — компенсируем сдвиг
+            let scrollTarget = absoluteTop;
             if (target.closest('.approach, .cases-page')) {
-                realTop = visualTop + offset;
+                scrollTarget = absoluteTop + offset;
             }
             
-            // 4. Базовый offset
-            let adjustment = -headerHeight - 128;
-            
-            // 5. Индивидуальные корректировки
-            if (targetId === '#cases') {
-                adjustment -= 256;  // блок окажется выше
-            } else if (targetId === '#approach') {
-                adjustment -= 16;   // блок окажется ниже на 64px
+            // Скроллим с учётом высоты хедера
+            lenis.scrollTo(scrollTarget - headerHeight, {
+                onComplete: () => {
+                    // Закрываем мобильное меню после завершения скролла
+                    const mobileMenu = document.querySelector('.mobile-menu');
+                    const burger = document.querySelector('.burger');
+                    if (mobileMenu && burger) {
+                        mobileMenu.classList.remove('is-active');
+                        burger.classList.remove('is-active');
+                        document.body.classList.remove('menu-open');
+                    }
+                }
+            });
+        } else {
+            // Целевой элемент не найден (например, #approach на странице кейса)
+            // Просто закрываем мобильное меню, если оно открыто
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const burger = document.querySelector('.burger');
+            if (mobileMenu && burger) {
+                mobileMenu.classList.remove('is-active');
+                burger.classList.remove('is-active');
+                document.body.classList.remove('menu-open');
             }
-            
-            // 6. Скроллим к реальной позиции
-            lenis.scrollTo(realTop + adjustment);
         }
     });
 });
@@ -368,20 +379,16 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
             }
         });
 
-        mobileMenu.querySelectorAll('.mobile-menu__link').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('is-active');
-                burger.classList.remove('is-active');
-                document.body.classList.remove('menu-open');
-            });
-        });
-
+        // Закрываем мобильное меню после якорной навигации (обрабатывается в общем обработчике a[href^="#"])
+        // CTA кнопка закрывает меню после завершения скролла
         const ctaBtn = mobileMenu.querySelector('.mobile-menu__cta');
         if (ctaBtn) {
             ctaBtn.addEventListener('click', () => {
-                mobileMenu.classList.remove('is-active');
-                burger.classList.remove('is-active');
-                document.body.classList.remove('menu-open');
+                setTimeout(() => {
+                    mobileMenu.classList.remove('is-active');
+                    burger.classList.remove('is-active');
+                    document.body.classList.remove('menu-open');
+                }, 100);
             });
         }
 

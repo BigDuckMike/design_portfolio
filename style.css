@@ -475,7 +475,7 @@ main {
 .cases-page__inner {
     max-width: 1440px;
     margin: 0 auto;
-    padding: 0 16px;
+    padding: 0;
 }
 
 /* Title блок */
@@ -1911,7 +1911,7 @@ body.menu-open {
     }
 
     .cases-page__inner {
-        padding: 0 16px;
+        padding: 0;
     }
 
     .case-card__image {
