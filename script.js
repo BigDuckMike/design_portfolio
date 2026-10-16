@@ -159,7 +159,6 @@ document.addEventListener('DOMContentLoaded', () => {
 function updateFooterPadding() {
     const footer = document.querySelector('.footer');
     if (footer) {
-        // padding-bottom = высоте футера, чтобы был куда скроллить
         document.body.style.paddingBottom = footer.offsetHeight + 'px';
     }
 }
@@ -274,11 +273,18 @@ setTimeout(updateFooterPadding, 1500);
 const approach = document.querySelector('.approach');
 const heroInner = document.querySelector('.hero__inner');
 const followingSection = document.querySelector('.cases-page');
+const contactsSection = document.querySelector('.contacts');
+
+if (approach && followingSection && contactsSection) {
+    document.body.classList.add('is-home');
+}
 
 let parallaxLocked = false;
 
 function applyParallax() {
     if (!approach) return;
+    if (!followingSection) return;
+    if (!contactsSection) return;
     if (parallaxLocked) return;
 
     const scrollY = window.scrollY;
@@ -292,17 +298,20 @@ function applyParallax() {
     const maxOffset = window.innerWidth <= 720 ? 250 : 677;
     offset = Math.min(offset, maxOffset);
 
-    approach.style.top = `-${offset}px`;
-
-    if (followingSection) {
-        followingSection.style.marginTop = `-${offset}px`;
-    }
+    approach.style.transform = `translateY(-${offset}px)`;
+    followingSection.style.transform = `translateY(-${offset}px)`;
+    contactsSection.style.transform = `translateY(-${offset}px)`;
 
     if (heroInner) {
-        const heroProgress = Math.min(scrollY / (heroHeight * 0.5), 1);
-        heroInner.style.opacity = 1 - heroProgress * 0.8;
-        heroInner.style.filter = `blur(${heroProgress * 8}px)`;
-    }
+        const heroProgress = Math.min(Math.max(scrollY, 0) / (heroHeight * 0.5), 1);
+        if (scrollY <= 1) {
+            heroInner.style.opacity = '';
+            heroInner.style.filter = '';
+        } else {
+            heroInner.style.opacity = 1 - heroProgress * 0.8;
+            heroInner.style.filter = `blur(${heroProgress * 8}px)`;
+        }
+    }    
 }
 
 if (approach) {
@@ -330,27 +339,57 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 
         // #top
         if (targetId === '#top') {
-            smoothScrollTo(0);
+            lenis.scrollTo(0, { duration: 0.8 });
             return;
         }
 
         // #footer — в самый низ
         if (targetId === '#footer') {
-            smoothScrollTo(document.documentElement.scrollHeight);
+            lenis.scrollTo(document.documentElement.scrollHeight, { duration: 0.8 });
             return;
         }
 
         const target = document.querySelector(targetId);
         if (!target) return;
 
-        // Первый проход: скроллим "на глаз"
-        const rect = target.getBoundingClientRect();
-        const firstTarget = rect.top + window.scrollY - headerHeight;
+        const hero = document.querySelector('.hero');
+        const isParallaxTarget = target.closest('.approach, .cases-page');
 
-        smoothScrollTo(firstTarget, () => {
-            // После завершения — корректируем позицию (1-2 итерации)
-            correctPosition(target, headerHeight);
-        });
+        // Если цель НЕ внутри параллакс-блока — обычный скролл
+        if (!hero || !isParallaxTarget) {
+            const rect = target.getBoundingClientRect();
+            lenis.scrollTo(rect.top + window.scrollY - headerHeight, { duration: 0.8 });
+            return;
+        }
+
+        // Цель внутри параллакс-блока — считаем S с учётом offset
+        const heroHeight = hero.offsetHeight;
+        const triggerPoint = heroHeight - window.innerHeight;
+        const maxOffset = window.innerWidth <= 720 ? 250 : 677;
+
+        const rect = target.getBoundingClientRect();
+        const currentScroll = window.scrollY;
+
+        // Текущий offset, уже применённый параллаксом к .approach / .cases-page
+        let currentOffset = currentScroll > triggerPoint
+            ? (currentScroll - triggerPoint) * 0.3
+            : 0;
+        currentOffset = Math.min(currentOffset, maxOffset);
+
+        // Истинная layout-позиция цели (без влияния параллакса)
+        const rawLayoutTop = rect.top + currentScroll + currentOffset;
+
+        let S = rawLayoutTop - headerHeight;
+        for (let i = 0; i < 5; i++) {
+            let offset = S > triggerPoint ? (S - triggerPoint) * 0.3 : 0;
+            offset = Math.min(offset, maxOffset);
+            const visualTop = rawLayoutTop - offset;
+            const desiredS = visualTop - headerHeight;
+            if (Math.abs(desiredS - S) < 1) break;
+            S = desiredS;
+        }
+
+        lenis.scrollTo(S, { duration: 0.8 });
     });
 });
 
@@ -361,39 +400,11 @@ function smoothScrollTo(y, onComplete) {
     lenis.scrollTo(y, {
         duration: 0.8,
         onComplete: () => {
-            // Ждём кадр, чтобы layout устоялся, и только потом разблокируем
-            requestAnimationFrame(() => {
-                applyParallax(); // применяем параллакс один раз по финальному scrollY
-                parallaxLocked = false;
-
-                if (onComplete) onComplete();
-            });
-        }
-    });
-}
-
-// ===== Итеративная коррекция позиции =====
-function correctPosition(target, headerHeight, attempt = 0) {
-    if (attempt > 3) return; // защита от зацикливания
-
-    const rect = target.getBoundingClientRect();
-    const diff = rect.top - headerHeight;
-
-    // Если попали в допуск ±4px — готово
-    if (Math.abs(diff) <= 4) return;
-
-    const newY = window.scrollY + diff;
-
-    parallaxLocked = true;
-    lenis.scrollTo(newY, {
-        duration: 0.4,
-        onComplete: () => {
-            requestAnimationFrame(() => {
-                applyParallax();
-                parallaxLocked = false;
-                // Ещё одна проверка — рекурсивно
-                correctPosition(target, headerHeight, attempt + 1);
-            });
+            parallaxLocked = false;
+            applyParallax();
+            // принудительный финальный кадр, чтобы догнать точное значение scrollY
+            requestAnimationFrame(() => applyParallax());
+            if (onComplete) onComplete();
         }
     });
 }

@@ -1,3 +1,5 @@
+
+
 /* ===== СБРОС СТИЛЕЙ ===== */
 * {
     margin: 0;
@@ -12,6 +14,11 @@ html, body {
     color: #1D1D1F;
     background: #F5F5F7;
     min-height: 100vh;
+}
+
+body {
+    display: flow-root;
+    padding-bottom: 267px;
 }
 
 /* ===== ПРЕЛОАДЕР ===== */
@@ -925,7 +932,7 @@ main {
     max-width: 100%;
     background: #F5F5F7;
     position: relative;
-    top: 0;
+/*    top: 0; */
     z-index: 25;
 }
 
@@ -2471,5 +2478,15 @@ body.menu-open {
     /* ===== CASE CONTENT МОБИЛЬНЫЙ ===== */
     .case-content__container {
         padding: 0 16px;
+    }
+}
+
+body.is-home .contacts {
+    margin-bottom: -677px;
+}
+
+@media (max-width: 720px) {
+    body.is-home .contacts {
+        margin-bottom: -250px;
     }
 }
