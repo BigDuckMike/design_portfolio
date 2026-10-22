@@ -318,6 +318,55 @@ if (approach) {
     lenis.on('scroll', applyParallax);
 }
 
+// ===== Hero background frame sequence on scroll =====
+(function() {
+    const heroBgImg = document.querySelector('.hero__bg-img');
+    if (!heroBgImg) return;
+
+    const hero = document.querySelector('.hero');
+    if (!hero) return;
+
+    const totalFrames = 72;
+    const framePadding = 4; // 0001, 0002, ...
+
+    let currentFrame = 1;
+    let ticking = false;
+
+
+
+    function updateHeroBgFrames() {
+        const heroHeight = hero.offsetHeight;
+        const scrollY = window.scrollY;
+
+        let progress;
+        if (scrollY <= 0) {
+            progress = 0;
+        } else if (scrollY >= heroHeight) {
+            progress = 1;
+        } else {
+            progress = scrollY / heroHeight;
+        }
+
+        const frameIndex = Math.round(progress * (totalFrames - 1)) + 1;
+
+        if (frameIndex !== currentFrame && frameIndex >= 1 && frameIndex <= totalFrames) {
+            currentFrame = frameIndex;
+            const padded = String(currentFrame).padStart(4, '0');
+            const src = `elements/Content/hero/Video/frame_${padded}.webp`;
+            heroBgImg.src = src;
+        }
+
+        ticking = false;
+    }
+
+    lenis.on('scroll', () => {
+        if (!ticking) {
+            requestAnimationFrame(updateHeroBgFrames);
+            ticking = true;
+        }
+    });
+})();
+
     // ===== Якорные ссылки =====
 document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', (e) => {
