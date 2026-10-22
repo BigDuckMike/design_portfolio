@@ -2150,6 +2150,10 @@ body.menu-open {
         height: auto;
     }
 
+    .hero__inner {
+        margin-top: 32px;
+    }
+
     .header__nav,
     .btn_primary_small_icon {
         display: none;
