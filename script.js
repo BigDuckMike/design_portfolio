@@ -269,6 +269,19 @@ setTimeout(updateFooterPadding, 1500);
         smoothWheel: true,
     });
 
+    // ===== Header: фон плавно исчезает при скролле, показывая hero__bg =====
+    const header = document.querySelector('.header');
+    const hero = document.querySelector('.hero');
+
+    if (header && hero) {
+        lenis.on('scroll', () => {
+            const heroHeight = hero.offsetHeight;
+            const scrollY = window.scrollY;
+            const progress = Math.min(scrollY / heroHeight, 1);
+            header.style.background = `rgba(243, 243, 243, ${progress})`;
+        });
+    }
+
     // ===== Parallax для approach =====
 const approach = document.querySelector('.approach');
 const heroInner = document.querySelector('.hero__inner');

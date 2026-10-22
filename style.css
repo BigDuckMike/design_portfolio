@@ -74,8 +74,8 @@ body {
     width: 100%;
     z-index: 100;
     padding: 8px 16px;
-    background: rgba(243, 243, 243, 0.8);
-    backdrop-filter: blur(10px);
+    background: transparent;
+    transition: background 0.3s ease;
 }
 
 .header__inner {
@@ -209,7 +209,33 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: right center;
     z-index: 3;
+    display: block;
+}
+
+@media (max-width: 760px) {
+    .hero__bg-img {
+        display: none;
+    }
+}
+
+/* ===== HERO MOBILE IMAGE ===== */
+.hero__mobile-img {
+    display: none;
+    width: 176px;
+    height: 176px;
+    margin-bottom: 16px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero__mobile-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 16px;
 }
 
 .hero__inner {
@@ -1884,6 +1910,17 @@ body.menu-open {
         padding: 0 48px;
     }
 
+    .hero__bg-img {
+        display: none;
+    }
+
+    .hero__mobile-img {
+        display: block;
+        width: 256px;
+        height: 256px;
+        margin-left: 0;
+    }
+
     /* Case-hero — планшет */
     .case-hero__title {
         font-size: 48px;
@@ -2487,6 +2524,12 @@ body.menu-open {
     /* ===== CASE CONTENT МОБИЛЬНЫЙ ===== */
     .case-content__container {
         padding: 0 16px;
+    }
+
+    /* ===== HERO MOBILE IMAGE ===== */
+    .hero__mobile-img {
+        display: block;
+        margin-left: 0;
     }
 }
 
