@@ -1921,6 +1921,12 @@ body.menu-open {
         margin-left: 0;
     }
 
+    .hero__inner {
+        margin-top: auto;
+        transform: translateY(0) !important;
+        margin-bottom: 32px;
+    }
+
     /* Case-hero — планшет */
     .case-hero__title {
         font-size: 48px;
@@ -2151,7 +2157,9 @@ body.menu-open {
     }
 
     .hero__inner {
-        margin-top: 32px;
+        margin-top: 0;
+        transform: translateY(0) !important;
+        margin-bottom: 16px;
     }
 
     .header__nav,
