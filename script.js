@@ -277,8 +277,8 @@ setTimeout(updateFooterPadding, 1500);
         lenis.on('scroll', () => {
             const heroHeight = hero.offsetHeight;
             const scrollY = window.scrollY;
-            const progress = Math.min(scrollY / heroHeight, 1);
-            header.style.background = `rgba(243, 243, 243, ${progress})`;
+            const progress = Math.min(scrollY / (heroHeight * 0.7), 1);
+            header.style.background = `rgba(243, 243, 243, ${progress * 0.9})`;
         });
     }
 

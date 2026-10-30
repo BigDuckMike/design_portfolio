@@ -78,6 +78,12 @@ body {
     transition: background 0.3s ease;
 }
 
+/* Шапка с подложкой с самого начала (для страниц кейсов) */
+.header--solid {
+    background: rgba(245, 245, 247, 0.8) !important;
+    backdrop-filter: blur(10px);
+}
+
 .header__inner {
     display: flex;
     align-items: center;
