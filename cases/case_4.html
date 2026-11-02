@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кейс — Продуктовый дизайнер</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../addons/lenis.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="../addons/lens.min.js"></script>
+    <script src="../script.js" defer></script>
+</head>
+<body>
+
+    <!-- ===== ПРЕЛОАДЕР ===== -->
+    <div class="preloader">
+        <span class="preloader__count">0%</span>
+        <div class="preloader__bar-track">
+            <div class="preloader__bar"></div>
+        </div>
+    </div>
+
+    <!-- ===== ШАПКА ===== -->
+    <header class="header hero-animate header--solid" id="top">
+        <div class="header__inner">
+            <a href="../index.html" class="header__logo">
+                <img src="../elements/Logo.svg" alt="Logo" width="91" height="24">
+            </a>
+            <nav class="header__nav">
+                <a href="../index.html" class="header__link">На главную</a>
+                <a href="#cases" class="header__link">Еще кейсы</a>
+                <a href="../404.html" class="header__link">Обо мне</a>
+            </nav>
+            <a href="#footer" class="btn btn_primary_small_icon">
+                <span>Пообщаемся</span>
+                <img class="btn__icon btn__icon--default" src="../elements/icon_hand.png" alt="" width="20" height="20">
+                <img class="btn__icon btn__icon--hover" src="../elements/icon_hand.png" alt="" width="20" height="20">
+            </a>
+            <button class="burger" aria-label="Меню">
+                <span class="burger__line"></span>
+                <span class="burger__line"></span>
+                <span class="burger__line burger__line--short"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ===== МОБИЛЬНОЕ МЕНЮ ===== -->
+    <div class="mobile-menu">
+        <div class="mobile-menu__inner">
+            <nav class="mobile-menu__nav">
+                <a href="../index.html" class="mobile-menu__link">На главную</a>
+                <a href="#cases" class="mobile-menu__link">Еще кейсы</a>
+                <a href="../about.html" class="mobile-menu__link">Обо мне</a>
+            </nav>
+            <a href="#footer" class="btn btn_primary_small_icon mobile-menu__cta">
+                <span>Пообщаемся</span>
+                <img class="btn__icon btn__icon--default" src="../elements/icon_hand.png" alt="" width="20" height="20">
+                <img class="btn__icon btn__icon--hover" src="../elements/icon_hand.png" alt="" width="20" height="20">
+            </a>
+        </div>
+    </div>
+
+    <!-- ===== HERO КЕЙСА ===== -->
+    <section class="case-hero">
+        <div class="case-hero__top-bar">
+            <div class="scr_devider"></div>
+            <div class="case-hero__top-bar-inner">
+                <span class="top-bar__left">Портфолио *26</span>
+                <div class="top-bar__right">
+                    <img src="../elements/indicator_on.svg" alt="" width="17" height="17">
+                    <span>Готов к сотрудничеству</span>
+                </div>
+                <a href="../about.html" class="hero__right hero__right-mobile">
+                    Обо мне
+                    <img src="../elements/arrow-right.svg" alt="">
+                </a>
+            </div>
+        </div>
+
+        <div class="case-hero__bg"></div>
+        <div class="case-hero__inner">
+            <h1 class="case-hero__title">Haval × Киберспорт: <br>интерактивная <br>промо-страница</h1>
+            
+            <div class="case-hero__info">
+                <div class="case-hero__meta">
+                    <div class="case-hero__meta-item">
+                        <div class="case-hero__meta-label">Год</div>
+                        <div class="case-hero__meta-value">2023</div>
+                    </div>
+                    <div class="case-hero__meta-item">
+                        <div class="case-hero__meta-label">Роль</div>
+                        <div class="case-hero__meta-value">UI/UX дизайнер</div>
+                    </div>
+                    <div class="case-hero__meta-item">
+                        <div class="case-hero__meta-label">Формат</div>
+                        <div class="case-hero__meta-value">Web (адаптив: десктоп, планшет, мобильный)</div>
+                    </div>
+                </div>
+            </div>
+
+            <p class="case-hero__desc">Haval — автомобильный бренд, который 3 года интегрируется в киберспортивную индустрию: спонсирует турниры, поддерживает клубы (Virtus.pro), выпускает рекламные ролики в игровой стилистике, организаует русскоязычные стримы турниров. Анализ ЦА показал: геймеры — это не только молодежь, но и платежеспособная аудитория 25-35+ лет.</p>
+        </div>
+    </section>
+
+    <!-- ===== КОНТЕНТ КЕЙСА ===== -->
+    <section class="case-content">
+        <div class="case-content__inner">
+            <div class="case-content__image case-content__image--title">
+                <img src="../elements/Content/cases/case_3/img_title.jpg" alt="Геймифицированная промо-акция для QSR-сети">
+            </div>
+
+            <div class="case-content__text-block">
+                <div class="case-content__container">
+                    <div class="case-content__title-row">
+                        <span class="case-content__number">01</span>
+                        <h2 class="case-content__headline">Проблема</h2>
+                    </div>
+                    <div class="scr_devider"></div>
+                    <div class="case-content__text-content">
+                        <div class="case-content__text-inner">
+                            <p>Команда платёжных интерфейсов Яндекса заметила: апсейл не работает. Пользователи скипают его за 2 секунды, не вчитываясь. Гипотеза команды: проблема в формате — статичный баннер выглядит как навязчивая реклама и вызывает баннерную слепоту.</p>
+                            <p>Моя задача — проверить эту гипотезу и найти способ повысить конверсию, не ломая при этом текущий сценарий апсейла.</p>
+                            <p>Я провёл 5 глубинных интервью (включая одно синтетическое с AI) с активными пользователями Плюс. Выявил три основных барьера:</p>
+                            <ul class="case-content__bulits">
+                                <li class="case-content__bulits-item"><span class="bulits-item--bold">Ценовой шок. </span>500₽ сразу после оформления базового Плюса вызывают когнитивный диссонанс — пользователь чувствует навязанную услугу.</li>
+                                <li class="case-content__bulits-item"><span class="bulits-item--bold">Бесплатные альтернативы. </span>Пользователи сравнивают с торрентами и готовы мириться с низким качеством, лишь бы не платить. Абстрактное «1000+ сериалов» не создает ценности.</li>
+                                <li class="case-content__bulits-item"><span class="bulits-item--bold">Исполнение экрана. </span>Статичный баннер = баннерная слепота. Отсутствие гарантий отмены = страх подписной ловушки. Нужен не редизайн, а переосмысление механики.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 8px; margin: 16px 0 32px 0;">
+                <div class="case-content__image">
+                    <img src="../elements/Content/cases/case_3/img_subtitle-1.jpg" alt="Текущий флоу апсейла">
+                </div>
+                <span style="color: var(--Text_Gray_Dark, #AAA); text-align: center; font-family: var(--Text-Family, Montserrat); font-size: var(--Numbers-16, 16px); font-style: normal; font-weight: 500; line-height: 140%; letter-spacing: -0.32px;">Текущий сценарий апсейла</span>
+            </div>
+
+            <div class="case-content__text-block">
+                <div class="case-content__container">
+                    <div class="case-content__text-content">
+                        <h3 class="case-content__subheadline">Анализ конкурентов</h3>
+                        <div class="case-content__text-inner">
+                            <p>Я проанализировал 5 конкурентов (Т-Банк, Сбер, Иви, Кион, Mobbin) и выявил универсальные принципы:</p>
+                        </div>
+                        <div class="case-content__text-inner">
+                            <p>Что работает:</p>
+                            <ul class="case-content__bulits">
+                                <li class="case-content__bulits-item"><span class="bulits-item--bold">Конкретная выгода сразу. </span>Т-Банк показывает «Клининг с кэшбэком 15%», Иви — «99₽/мес». Пользователь за 2 секунды понимает ценность.</li>
+                                <li class="case-content__bulits-item"><span class="bulits-item--bold">Снижение рисков. </span>Иви размещает «Попробовать 30 дней бесплатно» + «Отменить можно в любой момент» прямо под кнопкой. Это решает главный барьер.</li>
+                                <li class="case-content__bulits-item"><span class="bulits-item--bold">Визуал вместо текста. </span>Иви использует видео топового сериала на фоне (эмоциональный триггер), Mobbin — список с галочками для быстрого сканирования.</li>
+                            </ul>
+                        </div>
+                        <div class="case-content__text-inner">
+                            <p><strong>Слабое место всех конкурентов:</p>
+                            <p>Ни один не использует персонализацию. Все показывают топовые предложения всем одинаково. Это возможность превратить в преимущество: показывать не статичный «Дом Дракона», а контент, который пользователь реально искал или смотрел.</p>
+                        </div>                       
+                    </div>
+                </div>
+            </div>
+
+            <div class="case-content__image case-content__image--title">
+                <img src="../elements/Content/cases/case_3/img_subtitle-2.jpg" alt="Анализ конкурентов">
+            </div>
+
+            <div class="case-content__text-block">
+                <div class="case-content__container">
+                    <div class="case-content__title-row">
+                        <span class="case-content__number">02</span>
+                        <h2 class="case-content__headline">Решение</h2>
+                    </div>
+                    <div class="scr_devider"></div>
+                    <div class="case-content__text-content">
+                        <h3 class="case-content__subheadline">От баннера к шторке</h3>
+                        <div class="case-content__text-inner">
+                            <p>Чтобы преодолеть выявленные барьеры, я сформулировал три гипотезы, каждая из которых проверяет конкретное изменение:</p>
+                            <ul class="case-content__bulits">
+                                <li class="case-content__bulits-item"><span class="bulits-item--bold">Персонализация вместо статики. </span>Замена одного постера на динамическую подборку из 3–5 тайтлов на основе истории просмотров пользователя. Ожидаемый эффект: пользователь увидит личную ценность предложения, а не абстрактную рекламу. Метрики успеха: Рост конверсии на 1–2% (абс.), время на экране +15–20%.</li>
+                                <li class="case-content__bulits-item"><span class="bulits-item--bold">Интерактивная шторка вместо баннера. </span>Переход от полноэкранного баннера к bottom sheet с механикой прогрессивного раскрытия (эмоциональный хук → слайдер ассортимента → УТП). Ожидаемый эффект: снижение когнитивной нагрузки, преодоление баннерной слепоты и наглядная демонстрация ценности. Метрики успеха: Рост конверсии на 1–2%, доля доскролливших до УТП ≥30%, время на экране +10–20%.</li>
+                                <li class="case-content__bulits-item"><span class="bulits-item--bold">Снижение порога входа (требует согласования с маркетингом). </span>Внедрение триала «7 дней бесплатно» с явным блоком «Отмена подписки в 2 клика в любой момент». Ожидаемый эффект: Снятие страха «подписочной ловушки» и когнитивного диссонанса от доплаты сразу после оформления базового Плюса. Метрики успеха: Рост конверсии на 2–3% (абс.), отток после окончания триала ≤70%.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="case-content__gallery">
+                <div class="case-content__gallery-item">
+                    <div class="case-content__gallery-image">
+                        <img src="../elements/Content/cases/case_3/img_1.jpg" alt="До">
+                    </div>
+                    <span class="case-content__gallery-label">Было</span>
+                </div>
+                <div class="case-content__gallery-item">
+                    <div class="case-content__gallery-image">
+                        <img src="../elements/Content/cases/case_3/img_2.jpg" alt="После">
+                    </div>
+                    <span class="case-content__gallery-label">Стало</span>
+                </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 8px; margin: 16px 0 32px 0;">
+                <div class="case-content__image">
+                    <img src="../elements/Content/cases/case_3/img_subtitle-3.jpg" alt="Доплднительный экран с УТП">
+                </div>
+                <span style="color: var(--Text_Gray_Dark, #AAA); text-align: center; font-family: var(--Text-Family, Montserrat); font-size: var(--Numbers-16, 16px); font-style: normal; font-weight: 500; line-height: 140%; letter-spacing: -0.32px;">При скроле вниз, шторка разворачивается в лендинг с дополнительной информацией.</span>
+            </div>
+
+            <div class="case-content__text-block">
+                <div class="case-content__container">
+                    <div class="case-content__text-content">
+                        <h3 class="case-content__subheadline_small">Тестирование и доработки</h3>
+                        <p>Я собрал кликабельный прототип и протестировал на 3 респондентах. Тестировал 2 экрана отдельно (основной и экран с УТП).</p>
+                    </div>
+                    <div class="case-content__text-content">
+                        <p>Главный экран:</p>
+                        <ul class="case-content__bulits">
+                            <li class="case-content__bulits-item"><span class="bulits-item--bold">Слайдер работает. </span>2 из 3 респондентов хотели поскролить подборку — это повышает вовлеченность без дополнительных подсказок.</li>
+                            <li class="case-content__bulits-item"><span class="bulits-item--bold">Цена 500₽ всё равно триггерит. </span>Даже с выгодным предложением (99₽ за первый месяц) отказываются. Но готовы подписаться на триал. Вывод: нужна отдельная механика предложения — не просто цена, а «7 дней бесплатно → 500₽/мес».</li>
+                            <li class="case-content__bulits-item"><span class="bulits-item--bold">Кнопка «Не сейчас» провоцирует мгновенный отказ. </span>Большая кнопка “Не сейчас” вызывает желание сразу скипнуть. На вопрос “А если бы ее небыло”, респонденты отмечали, что они бы искали крестик в правом верхнем углу. 2 из 3х респондентов отметили, что крестик в углу является основным паттерном для закрытия. Вывод: заменяем кнопку “Не сейчас” на более заметный крестик в правом верхнем углу.</li>
+                            <li class="case-content__bulits-item"><span class="bulits-item--bold">Не видят возможность скролла. </span>Пользователи не понимают, что экран можно прокрутить вниз. Вывод: увеличить вес нижней стрелки + (опционально) добавить анимацию.</li>
+                        </ul>
+                    </div>
+                    <div class="case-content__text-content">
+                        <p>Экран с УТП:</p>
+                        <ul class="case-content__bulits">
+                            <li class="case-content__bulits-item"><span class="bulits-item--bold">Второй слайдер так же работает. </span>Респонденты хотели поскролить — механика прогрессивного раскрытия удерживает внимание.</li>
+                            <li class="case-content__bulits-item"><span class="bulits-item--bold">Цена 500₽ всё равно триггерит. </span>Респонденты отмечали: «на пиратских сайтах есть то, чего нет на Кинопоиске». Вывод: провести анализ бесплатных конкурентов, выявить слабые стороны и усилить текущее предложение + доработать иллюстрации, сделать их менее абстрактными.</li>                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="case-content__gallery">
+                <div class="case-content__gallery-item">
+                    <div class="case-content__gallery-image">
+                        <img src="../elements/Content/cases/case_3/img_3.jpg" alt="До">
+                    </div>
+                    <span class="case-content__gallery-label">Было</span>
+                </div>
+                <div class="case-content__gallery-item">
+                    <div class="case-content__gallery-image">
+                        <img src="../elements/Content/cases/case_3/img_4.jpg" alt="После">
+                    </div>
+                    <span class="case-content__gallery-label">Стало</span>
+                </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 8px; margin: 16px 0 32px 0;">
+                <div class="case-content__image">
+                    <img src="../elements/Content/cases/case_3/img_subtitle-4.jpg" alt="Доплднительный экран с УТП">
+                </div>
+                <span style="color: var(--Text_Gray_Dark, #AAA); text-align: center; font-family: var(--Text-Family, Montserrat); font-size: var(--Numbers-16, 16px); font-style: normal; font-weight: 500; line-height: 140%; letter-spacing: -0.32px;">При скроле вниз, шторка разворачивается в лендинг с дополнительной информацией. <br>Крестик пропадает, но появляется кнопка не сейчас.</span>
+            </div>
+
+            <div class="case-content__text-block">
+                <div class="case-content__container">
+                    <div class="case-content__title-row">
+                        <span class="case-content__number">03</span>
+                        <h2 class="case-content__headline">Результат. Гипотетические метрики, реальные инсайты.</h2>
+                    </div>
+                    <div class="scr_devider"></div>
+                    <div class="case-content__text-content">
+                        <h3 class="case-content__subheadline_small">Продуктовые метрики (гипотезы для A/B теста)</h3>
+                        <ul class="case-content__bulits">
+                            <li class="case-content__bulits-item"><span class="bulits-item--bold">+1-2% </span>конверсия в апсейл</li>
+                            <li class="case-content__bulits-item"><span class="bulits-item--bold">+20-30% </span>время на экране (пользователи перестанут скипать за 2 секунды)</li>
+                            <li class="case-content__bulits-item"><span class="bulits-item--bold">≥30% </span>доля доскролливших до УТП</li>
+                        </ul>
+                    </div>
+                    <div class="case-content__text-content">
+                        <h3 class="case-content__subheadline_small">Маркетинговые метрики (гипотезы)</h3>
+                        <ul class="case-content__bulits">
+                            <li class="case-content__bulits-item"><span class="bulits-item--bold">≥20% </span>конверсия триала в платную подписку</li>
+                            <li class="case-content__bulits-item"><span class="bulits-item--bold">≤60% </span>отток после триала</li>
+                        </ul>
+                    </div>
+                    <div class="case-content__text-content">
+                        <h3 class="case-content__subheadline_small">Главный инсайт</h3>
+                        <p>Иногда лучший способ повысить конверсию — не «продать в лоб», а снять барьеры. Крестик вместо кнопки «Не сейчас», «отменить можно в любой момент» в CTA, честная цена после триала — это не уступки, а работа с доверием.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="case-content__text-block">
+                <div class="case-content__container">
+                    <div class="case-content__text-content">
+                        <h3 class="case-content__subheadline_small">Масштабирование: шаблон для экосистемы</h3>
+                        <p>После успешного тестирования формат можно шаблонизировать для других продуктов Яндекса:</p>
+                    </div>
+                    <div class="case-content__text-content">
+                        <p><strong>Х5 (Пятёрочка/Перекрёсток):</p>
+                        <ul class="case-content__bulits">
+                            <li class="case-content__bulits-item">Слайдер с выгодами (кэшбэк, бесплатная доставка)</li>
+                            <li class="case-content__bulits-item">Актуальные акции на популярные продукты</li>
+                            <li class="case-content__bulits-item">Лого сетей + слоган</li>
+                        </ul>
+                    </div>
+                    <div class="case-content__text-content">
+                        <p><strong>Матч ТВ:</p>
+                        <ul class="case-content__bulits">
+                            <li class="case-content__bulits-item">Слайдер с актуальными событиями (дата, счет, команды) вместо абстрактных футболистов</li>
+                            <li class="case-content__bulits-item">Разнообразие спортивных дисциплин</li>
+                            <li class="case-content__bulits-item">Лого Матч ТВ</li>
+                        </ul>
+                    </div>
+                    <div class="case-content__text-content">
+                        <p><strong>Внешняя персонализация:</p>
+                        <p>Увлекается спортом → Матч ТВ, активный шоппер → Х5 с выгодой. Внутри механики персонализация проблематична, но возможна на уровне выбора продукта для апсейла.</p>
+                    </div>
+                    <div class="case-content__text-content">
+                        <p><strong>Дополнительные продукты для апсейла:</p>
+                        <ul class="case-content__bulits">
+                            <li class="case-content__bulits-item">Яндекс 360 (для тех, кто использует Google Drive)</li>
+                            <li class="case-content__bulits-item">Алиса Про (владельцам умных устройств)</li>
+                            <li class="case-content__bulits-item">Яндекс Здоровье (тем, кто ищет симптомы, покупает лекарства)</li>
+                            <li class="case-content__bulits-item">Подписка на самокаты (аудитория 18-30, гуляют по центру)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== КЕЙСЫ ===== -->
+    <section class="cases-page" id="cases">
+        <div class="cases-page__inner">
+            <div class="cases-page__title">
+                <div class="cases-page__title-text">
+                    <span class="cases-page__number">04</span>
+                    <span class="cases-page__heading">Еще кейсы</span>
+                </div>
+                <div class="scr_devider"></div>
+            </div>
+
+            <div class="cases-list">
+                <div class="cases-tab" data-tab="product">
+                    <!-- Кейс A -->
+                    <div class="case-card">
+                        <div class="block_devider_gray"></div>
+                        <a href="case_1.html" class="case-card__content">
+                            <div class="case-card__number">A</div>
+                            <div class="case-card__left">
+                                <div class="case-card__info">
+                                    <h3 class="case-card__title">Геймифицированная промо-акция<br>для QSR-сети</h3>
+                                    <p class="case-card__desc">Мобильный интерфейс для участия в акции со сканированием чеков,<br>коллекционированием кодов и розыгрышами призов</p>
+                                    <div class="case-card__tags">
+                                        <span class="case-card__tag">Product Design</span>
+                                        <span class="case-card__tag">Mobile App</span>
+                                        <span class="case-card__tag">Figma</span>
+                                        <span class="case-card__tag tag-placeholder">Tag text</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="case-card__image">
+                                <img src="../elements/Casecards/Product_Case_1.jpg" alt="Case A">
+                            </div>
+                            <div class="case-card__arrow">
+                                <img class="arrow-default" src="../elements/arrow-right.svg" alt="">
+                                <img class="arrow-hover" src="../elements/arrow-right-blue.svg" alt="">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Кейс B -->
+                    <div class="case-card">
+                        <div class="block_devider_gray"></div>
+                        <a href="case_2.html" class="case-card__content">
+                            <div class="case-card__number">B</div>
+                            <div class="case-card__left">
+                                <div class="case-card__info">
+                                    <h3 class="case-card__title">Погодный интерфейс<br>для Яндекс Карт</h3>
+                                    <p class="case-card__desc">Интеграция погодных данных в навигационный сценарий:<br>виджет, детальный прогноз и ситуативные уведомления</p>
+                                    <div class="case-card__tags">
+                                        <span class="case-card__tag">Product Design</span>
+                                        <span class="case-card__tag">UX Research + UI</span>
+                                        <span class="case-card__tag">Mobile App</span>
+                                        <span class="case-card__tag">Figma</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="case-card__image">
+                                <img src="../elements/Casecards/Product_Case_2.jpg" alt="Case B">
+                            </div>
+                            <div class="case-card__arrow">
+                                <img class="arrow-default" src="../elements/arrow-right.svg" alt="">
+                                <img class="arrow-hover" src="../elements/arrow-right-blue.svg" alt="">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Кейс C -->
+                    <div class="case-card case-card--hidden">
+                        <div class="block_devider_gray"></div>
+                        <a href="#" class="case-card__content">
+                            <div class="case-card__number">C</div>
+                            <div class="case-card__left">
+                                <div class="case-card__info">
+                                    <h3 class="case-card__title">Повышение конверсии<br>в апсейл Яндекс Плюс</h3>
+                                    <p class="case-card__desc">Изменение механики экрана апсейла: от статичного баннера<br>к персонализированной шторке с прогрессивным раскрытием</p>
+                                    <div class="case-card__tags">
+                                        <span class="case-card__tag">Product Design</span>
+                                        <span class="case-card__tag">UX Research + UI</span>
+                                        <span class="case-card__tag">Mobile App</span>
+                                        <span class="case-card__tag">Figma</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="case-card__image">
+                                <img src="../elements/Casecards/Product_Case_3.jpg" alt="Case C">
+                            </div>
+                            <div class="case-card__arrow">
+                                <img class="arrow-default" src="../elements/arrow-right.svg" alt="">
+                                <img class="arrow-hover" src="../elements/arrow-right-blue.svg" alt="">
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== КОНТАКТЫ ===== -->
+    <section class="contacts" id="contacts">
+        <div class="contacts__inner">
+            <div class="contacts__title page-title">
+                <div class="page-title__text">
+                    <span class="contacts__number">05</span>
+                    <span class="contacts__heading">Контакты</span>
+                </div>
+                <div class="scr_devider"></div>
+            </div>
+
+            <div class="contacts__card contacts__card--animated">
+                <div class="contacts__content">
+                    <h2 class="contacts__headline">Давайте<br>знакомиться!</h2>
+                    <p class="contacts__desc">Мой опыт в коммуникационном дизайне и моушене помогает создавать интерфейсы, которые не просто работают, но и удерживают внимание пользователя. Понимаю ограничения верстки (HTML/CSS/JS), что помогает говорить с разработчиками на одном языке и ускоряет передачу макетов.</p>
+                    <div class="contacts__socials">
+                        <a href="https://t.me/malanov" class="contacts__social contacts__social--tg">
+                            <img class="social-icon--default" src="../elements/tg_b.svg" alt="Telegram" width="16" height="16">
+                            <img class="social-icon--hover" src="../elements/tg_w.svg" alt="Telegram" width="16" height="16">
+                        </a>
+                        <a href="https://vk.ru/mikemal" class="contacts__social contacts__social--vk">
+                            <img class="social-icon--default" src="../elements/vk_b.svg" alt="VK" width="16" height="16">
+                            <img class="social-icon--hover" src="../elements/vk_w.svg" alt="VK" width="16" height="16">
+                        </a>
+                        <a href="https://wa.me/qr/7PNFHAGL4TN4G1" class="contacts__social contacts__social--wu">
+                            <img class="social-icon--default" src="../elements/wu_b.svg" alt="WhatsApp" width="16" height="16">
+                            <img class="social-icon--hover" src="../elements/wu_w.svg" alt="WhatsApp" width="16" height="16">
+                        </a>
+                    </div>
+                </div>
+                <a href="../elements/Resume_Malanov.pdf" target="_blank" class="btn btn_resume">
+                    Скачать резюме
+                    <img class="btn__icon btn__icon--default" src="../elements/pdf-black.svg" alt="" width="16" height="16">
+                    <img class="btn__icon btn__icon--hover" src="../elements/pdf-white.svg" alt="" width="16" height="16">
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ФУТЕР ===== -->
+    <footer class="footer" id="footer">
+        <div class="footer__inner">
+            <div class="footer__left">
+                <div class="footer__spin">
+                    <img src="../elements/Spin_1.svg" alt="">
+                </div>
+                <div class="footer__logo">
+                    <img src="../elements/Logo_2.svg" alt="Logo" width="61" height="24">
+                </div>
+            </div>
+            <div class="footer__right">
+                <div class="footer__info">
+                    <div class="footer__column">
+                        <span class="footer__label">E-MAIL</span>
+                        <span class="footer__link">m.malanov@gmail.com</span>
+                    </div>
+                    <div class="footer__column">
+                        <span class="footer__label">PHONE</span>
+                        <span class="footer__link">+7 916 252 64 29</span>
+                    </div>
+                    <div class="footer__column">
+                        <span class="footer__label">LOCATION</span>
+                        <span class="footer__link">Moscow</span>
+                    </div>
+                </div>
+                <div class="footer__divider"></div>
+                <div class="footer__bottom">
+                    <span class="footer__copyright">© 2026 Маланов Михаил</span>
+                    <span class="footer__credit">Спроектировано с любовью</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
