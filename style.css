@@ -1617,6 +1617,10 @@ main {
     margin: 0;
 }
 
+.case-content__text-content h3 {
+    padding-bottom: 8px;
+}
+
 .case-content__text-content p:last-child {
     margin-bottom: 0;
 }
@@ -1683,6 +1687,13 @@ main {
     letter-spacing: -0.32px;
     margin: 0 0 16px;
 }
+
+.case-content__text-inner h3 {
+    padding-bottom: 8px;
+}
+
+
+
 
 .case-content__text-inner p:last-child {
     margin-bottom: 0;
